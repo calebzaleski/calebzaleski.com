@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Main - Caleb Zaleski</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="image.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+
     <style>
         .content {
             text-align: center;
@@ -17,29 +20,52 @@
 
 <!-- Your about page content -->
 <div class="content">
-    <h1>Home!</h1>
+    <h1>Home</h1>
     <p>Here you can find a bunch of stuff about me and my projects.</p>
-    <p>Current time: <span id="current-time"></span></p>
-
-
-
 </div>
 
-<footer>
-    <p align="center">
+
+
+
+
+<div id="row">
+<div class="displaybox">
+
+    <p>Time: <span id="current-time"></span></p>
+</div>
+<div class="displaybox">
+
+    <p>Current soil sensor: <span id="current-mqtt"></span> coming soon</p>
+</div>
+</div>
+
+
+
+
+
+
+<footer class="footer">
+    <p>
         <a href="https://github.com/calebzaleski">
             <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
         </a>
     </p>
 </footer>
 
-<!-- JavaScript to load navbar -->
-<script src="functions.js"></script>
-<script>
 
-// Update every second for a live clock
-setInterval(function() {
-    document.getElementById('current-time').textContent = CurTime();
-}, 1000);</script>
+<!-- Load your functions.js -->
+<script src="functions.js"></script>
+
+<!-- Initialize everything -->
+<script>
+    // Time updates every second
+    setInterval(function() {
+        document.getElementById('current-time').textContent = CurTime();
+    }, 1000);
+
+    // MQTT - call once, updates automatically
+    MQTT('current-mqtt');
+</script>
+
 </body>
 </html>

@@ -2,6 +2,10 @@
   <dictionary name="project">
     <words>
       <w>displaybox</w>
+      <w>displayboxbottom</w>
+      <w>displayboxmain</w>
+      <w>displayboxwrapper</w>
+      <w>getapi</w>
       <w>zaleski</w>
     </words>
   </dictionary>

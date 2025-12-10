@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
+
 <head>
     <meta charset="UTF-8">
-    <title>Main - Caleb Zaleski</title>
+    <title>Home | Caleb Zaleski</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="image.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
@@ -27,16 +30,66 @@
 
 
 
-
 <div id="row">
-<div class="displaybox">
 
-    <p>Time: <span id="current-time"></span></p>
-</div>
-<div class="displaybox">
+<div class="displayboxmain2">
 
-    <p>Current soil sensor: <span id="current-mqtt"></span> coming soon</p>
+    <p><span id="verse"></span></p>
+
 </div>
+
+
+    <div class="displayboxmain2">
+
+        <p><span id="quote"></span></p>
+    </div>
+
+
+</div>
+<div id="row2">
+
+    <div class="displayboxmain1">
+        <p>Current soil sensor: coming soon</p>
+    </div>
+
+    <div class="displayboxmain1">
+        <p>Time: <span id="current-time"></span></p>
+    </div>
+
+    <div class="displayboxmain1">
+        <p>stocks</p>
+    </div>
+
+</div>
+
+
+<div id="row3">
+    <div class="displayboxwrapper">
+        <div class="displayboxmain1">
+            <p>2</p>
+        </div>
+        <div class="displayboxbottom1">
+            <p>title</p>
+        </div>
+    </div>
+
+    <div class="displayboxwrapper">
+        <div class="displayboxmain1">
+            <p>2</p>
+        </div>
+        <div class="displayboxbottom1">
+            <p>title</p>
+        </div>
+    </div>
+
+    <div class="displayboxwrapper">
+        <div class="displayboxmain1">
+            <p>2</p>
+        </div>
+        <div class="displayboxbottom1">
+            <p>title</p>
+        </div>
+    </div>
 </div>
 
 
@@ -53,18 +106,18 @@
 </footer>
 
 
+
 <!-- Load your functions.js -->
 <script src="functions.js"></script>
 
 <!-- Initialize everything -->
 <script>
     // Time updates every second
-    setInterval(function() {
-        document.getElementById('current-time').textContent = CurTime();
-    }, 1000);
+    setInterval(function() {document.getElementById('current-time').textContent = CurTime();}, 1000);
 
     // MQTT - call once, updates automatically
-    MQTT('current-mqtt');
+    QOTD('quote')
+    VOTD('verse')
 </script>
 
 </body>

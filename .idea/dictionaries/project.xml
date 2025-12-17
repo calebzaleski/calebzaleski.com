@@ -1,11 +1,18 @@
 <component name="ProjectDictionaryState">
   <dictionary name="project">
     <words>
+      <w>buttonbox</w>
+      <w>buttonboxmain</w>
+      <w>buttonboxtitle</w>
+      <w>buttonboxwrapper</w>
+      <w>cloudflared</w>
       <w>displaybox</w>
       <w>displayboxbottom</w>
       <w>displayboxmain</w>
       <w>displayboxwrapper</w>
       <w>getapi</w>
+      <w>mysecretcode</w>
+      <w>rebootbutton</w>
       <w>zaleski</w>
     </words>
   </dictionary>

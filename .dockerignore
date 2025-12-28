@@ -1,0 +1,5 @@
+.idea
+/dashboard
+.gitignore
+/.git
+Dockerfile

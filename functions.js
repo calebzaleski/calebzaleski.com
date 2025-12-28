@@ -54,3 +54,21 @@ function VOTD(elementId) {
     getapi(url);
 }
 
+function NOTD(elementId) {
+    const url = 'http://192.168.1.200:3001/no';
+
+    async function getapi(url)
+    {
+        const response = await fetch(url);
+        var data = await response.json();
+        console.log(data);
+
+       const no = data.reason;
+
+        document.getElementById(elementId).textContent =
+            `"${no}"`;
+    }
+
+    getapi(url);
+}
+

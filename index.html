@@ -52,10 +52,10 @@
 <div id="row2">
     <div class="displayboxwrapper">
         <div class="displayboxmain1">
-            <p>Current soil sensor: coming soon</p>
+            <p><span id="no"></span></p>
         </div>
         <div class="displayboxbottom1">
-            <p>Soil Sensor Reading</p>
+            <p>how to say no</p>
         </div>
     </div>
     <div class="displayboxwrapper">
@@ -130,10 +130,14 @@
 <script>
     // Time updates every second
     setInterval(function() {document.getElementById('current-time').textContent = CurTime();}, 1000);
+    setInterval(function() { NOTD('no'); }, 25000);
 
     // MQTT - call once, updates automatically
     QOTD('quote')
     VOTD('verse')
+    NOTD('no')
+
+
 </script>
 
 </body>

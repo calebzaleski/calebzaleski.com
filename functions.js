@@ -55,7 +55,7 @@ function VOTD(elementId) {
 }
 
 function NOTD(elementId) {
-    const url = 'http://192.168.1.200:3001/no';
+    const url = 'https://noas.calebzaleski.com/no';
 
     async function getapi(url)
     {

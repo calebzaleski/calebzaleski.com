@@ -17,7 +17,7 @@ body {
 /* Navbar styles - AT THE TOP */
 .navbar {
     background: linear-gradient(to top right, #350202, #bd0e0e, #e1a6a6);
-    padding: 15px 30px;
+    padding: 5px 30px;
     display: flex;
     align-items: center;
     gap: 30px;
@@ -27,6 +27,7 @@ body {
     width: 100%;
     z-index: 1000;
     box-sizing: border-box;
+    box-shadow: 0 4px 12px rgb(0, 0, 0);
 }
 
 .logo {

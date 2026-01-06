@@ -17,7 +17,7 @@ function CurTime() {
 
 
 function QOTD(elementId) {
-    const url = "https://api.allorigins.win/raw?url=https://zenquotes.io/api/today";
+    const url = "https://quoteoftheday.calebzaleski.com/daily_quote";
 
     async function getapi(url)
     {

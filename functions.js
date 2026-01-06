@@ -26,8 +26,7 @@ function QOTD(elementId) {
         console.log(data);
 
         document.getElementById(elementId).textContent =
-            ' "' + data[0].q + '" — ' + data[0].a;
-
+            `"${data.quote.quote}" — ${data.quote.author}`;
     }
 
     getapi(url);

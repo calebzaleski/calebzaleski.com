@@ -22,10 +22,24 @@
 <div class="content">
     <h1>3d printer!</h1>
     <p>PLA</p>
-    <button onclick="addTask('test', 'threedprinting_list', 'Test task from button')">
-        <p>Add Task</p></button>
+
+    <input
+            type="text"
+            id="taskInput"
+            placeholder="Enter task..."
+    />
+
+    <select id="tableSelect">
+        <option value="website_list">Tasks</option>
+        <option value="threedprinting_list">School Tasks</option>
+        <option value="stir_it_up_list">Work Tasks</option>
+    </select>
+
+    <button onclick="addTask()">Add Task</button>
+
+
     <button onclick="fetch_all('threedprinting_list')">
-        <p>fetch all</p></button>
+        fetch all</button>
 </div>
 
 <script src="APIs.js"></script>

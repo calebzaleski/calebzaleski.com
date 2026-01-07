@@ -1,5 +1,12 @@
-function addTask(elementId, table, task) {
+function addTask() {
     const url = 'https://postgres.calebzaleski.com/add-task';
+    const task = document.getElementById('taskInput').value;
+    const table = document.getElementById('tableSelect').value;
+
+    if (!task.trim()) {
+        alert('Please enter a task');
+        return;
+    }
 
     async function postTask(url) {
         try {
@@ -12,6 +19,7 @@ function addTask(elementId, table, task) {
             const data = await response.json();
             console.log('Inserted task:', data);
             alert(`Task added: "${data.inserted.task}" (completed: ${data.inserted.completed})`);
+            document.getElementById('taskInput').value = ''; // Clear input
 
         } catch (err) {
             console.error('Error adding task:', err);
@@ -21,6 +29,10 @@ function addTask(elementId, table, task) {
 
     postTask(url);
 }
+
+
+
+
 function fetch_all(table) {
     const url = 'https://postgres.calebzaleski.com/fetch_all';
 

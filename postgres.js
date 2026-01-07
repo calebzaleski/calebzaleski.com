@@ -1,4 +1,4 @@
-function addTask(table, task) {
+function addTask(elementId, table, task) {
     const url = 'https://postgres.calebzaleski.com/add-task';
 
     async function postTask(url) {

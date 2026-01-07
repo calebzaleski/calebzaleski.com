@@ -22,10 +22,13 @@
 <div class="content">
     <h1>3d printer!</h1>
     <p>PLA</p>
-    <button onclick="addTask('website_list', 'Test task from button')">
+    <button onclick="addTask('test', 'threedprinting_list', 'Test task from button')">
         <p>Add Task</p></button>
 </div>
 
 <script src="APIs.js"></script>
 <script src="postgres.js"></script>
 
+<script>
+ addTask('test', 'threedprinting_list', 'Test task from script');
+</script>

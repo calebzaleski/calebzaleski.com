@@ -16,11 +16,6 @@ async function addTask(table, task) {
 }
 
 // Attach click event to button
-document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('addWebsiteTask');
-    btn.addEventListener('click', () => {
-        addTask('website_list', 'Test task from button');
-    });
-});
+
 
 // usage example:

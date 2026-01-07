@@ -1,4 +1,5 @@
-function addTask(table, task) {
+// attach to window so onclick can find it
+window.addTask = function(table, task) {
     return fetch('https://postgres.calebzaleski.com/add-task', {
         method: 'POST',
         headers: {
@@ -15,7 +16,6 @@ function addTask(table, task) {
             console.error('Error adding task:', err);
             throw err;
         });
-}
+};
 
 // usage example:
-addTask('website_list', 'Test task from website');

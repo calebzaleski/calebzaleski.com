@@ -34,8 +34,9 @@ function fetch_all(table) {
 
             const data = await response.json();
             console.log('All tasks:', data.tasks);
-            // Do something with data.tasks here
-
+            data.tasks.forEach(task => {
+                console.log(`Task: "${task.task}" | Completed: ${task.completed}`);
+            });
         } catch (err) {
             console.error('Error fetching tasks:', err);
             alert('Failed to fetch tasks');

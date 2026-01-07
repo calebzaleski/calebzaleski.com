@@ -45,7 +45,7 @@ function fetch_all(table) {
             });
 
             const data = await response.json();
-            console.log('All tasks:', data.tasks);
+            return data.tasks; // 👈 RETURN THE DATA
             data.tasks.forEach(task => {
                 console.log(`Task: "${task.task}" | Completed: ${task.completed}`);
             });
@@ -55,5 +55,12 @@ function fetch_all(table) {
         }
     }
 
-    fetch_tasks(url);
+   return fetch_tasks(url);
+}
+//this renders the function above to be able to use in a .html
+async function handleFetchClick() {
+    const tasks = await fetch_all('website_list');
+    document.getElementById('task-list').innerHTML = tasks.map(task =>
+        `<p>${task.task}</p>`
+    ).join('');
 }

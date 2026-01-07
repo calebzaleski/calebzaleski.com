@@ -21,7 +21,26 @@ function addTask(elementId, table, task) {
 
     postTask(url);
 }
-// Attach click event to button
+function fetch_all(table) {
+    const url = 'https://postgres.calebzaleski.com/fetch_all';
 
+    async function fetch_tasks(url) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ table })
+            });
 
-// usage example:
+            const data = await response.json();
+            console.log('All tasks:', data.tasks);
+            // Do something with data.tasks here
+
+        } catch (err) {
+            console.error('Error fetching tasks:', err);
+            alert('Failed to fetch tasks');
+        }
+    }
+
+    fetch_tasks(url);
+}

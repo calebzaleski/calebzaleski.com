@@ -1,21 +1,26 @@
 // attach to window so onclick can find it
-window.addTask = function(table, task) {
-    return fetch('https://postgres.calebzaleski.com/add-task', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ table, task })
-    })
-        .then(res => res.json())
-        .then(data => {
-            console.log('Inserted task:', data);
-            return data;
-        })
-        .catch(err => {
-            console.error('Error adding task:', err);
-            throw err;
+async function addTask(table, task) {
+    try {
+        const res = await fetch('https://postgres.calebzaleski.com/add-task', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ table, task })
         });
-};
+        const data = await res.json();
+        console.log('Inserted task:', data);
+        alert(`Task added: ${data.inserted.task}`);
+    } catch (err) {
+        console.error('Error adding task:', err);
+        alert('Failed to add task');
+    }
+}
+
+// Attach click event to button
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('addWebsiteTask');
+    btn.addEventListener('click', () => {
+        addTask('website_list', 'Test task from button');
+    });
+});
 
 // usage example:

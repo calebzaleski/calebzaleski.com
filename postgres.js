@@ -45,18 +45,17 @@ function fetch_all(table) {
             });
 
             const data = await response.json();
-            return data.tasks; // 👈 RETURN THE DATA
-            data.tasks.forEach(task => {
-                console.log(`Task: "${task.task}" | Completed: ${task.completed}`);
-            });
+            return data.tasks; // Return after getting the data
         } catch (err) {
             console.error('Error fetching tasks:', err);
             alert('Failed to fetch tasks');
+            return []; // Return empty array on error
         }
     }
 
-   return fetch_tasks(url);
+    return fetch_tasks(url);
 }
+
 //this renders the function above to be able to use in a .html
 async function handleFetchClick() {
     const tasks = await fetch_all('website_list');

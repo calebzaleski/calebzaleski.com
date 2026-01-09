@@ -59,7 +59,7 @@ function fetch_all(table) {
 //this renders the function above to be able to use in a .html
 async function handleFetchClick() {
     const tasks = await fetch_all('website_list');
-    document.getElementById('website').innerHTML = tasks.map(task =>
+    document.getElementById('website_list').innerHTML = tasks.map(task =>
         `<p>${task.task}</p>`
     ).join('');
 }

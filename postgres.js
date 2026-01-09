@@ -57,9 +57,16 @@ function fetch_all(table) {
 }
 
 //this renders the function above to be able to use in a .html
-async function handleFetchClick() {
+async function handleFetchWebsite() {
     const tasks = await fetch_all('website_list');
     document.getElementById('website_list').innerHTML = tasks.map(task =>
         `<p>${task.task}</p>`
+    ).join('');
+}
+
+async function handleFetchThreeDPrinting() {
+    const items = await fetch_all('threedprinting_list');
+    document.getElementById('threedprinting_list').innerHTML = items.map(item =>
+        `<p>${item.name}</p>`  // Change 'task' to whatever property your data uses
     ).join('');
 }

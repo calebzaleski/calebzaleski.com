@@ -205,11 +205,9 @@ h1 {
 }
 .tasklist {
     box-sizing: border-box;
-    flex: 1;  /* Let it grow to fill available space */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;  /* Align to the left instead of center */
-    justify-content: flex-start;  /* Stack from top */
+    align-items: center;  /* Align to the left instead of center */
     background-color: #b84a4a;
     border-radius: 4px;
     margin: 15px 15px 15px 15px;
@@ -217,7 +215,7 @@ h1 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     font-family: Arial, sans-serif;
     font-weight: bolder;
-    width: 100%;  /* Or a larger fixed width like 300px */
-    height: auto;  /* Let it grow with content, or use min-height: 200px */
-    overflow-y: auto;  /* Scroll if needed */
+    width: 30vw;  /* Or a larger fixed width like 300px */
+    min-height: 1px;  /* Let it grow with content, or use min-height: 200px */
+    height: auto;
 }

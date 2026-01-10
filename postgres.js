@@ -17,7 +17,6 @@ function addTask() {
             });
 
             const data = await response.json();
-            console.log('Inserted task:', data);
             alert(`Task added: "${data.inserted.task}" (completed: ${data.inserted.completed})`);
             document.getElementById('taskInput').value = ''; // Clear input
 
@@ -31,7 +30,27 @@ function addTask() {
 }
 
 
+function updateTask(table, task, completed) {
+    const url = 'https://postgres.calebzaleski.com/update_task';
 
+    async function postUpdate(url) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ table, task, completed })
+            });
+
+            const data = await response.json();
+
+        } catch (err) {
+            console.error('Error updating task:', err);
+            alert('Failed to update task');
+        }
+    }
+
+    postUpdate(url);
+}
 
 function fetch_all(table) {
     const url = 'https://postgres.calebzaleski.com/fetch_all';
@@ -81,25 +100,3 @@ async function handleFetchThreeDPrinting() {
     ).join('');
 }
 
-function updateTask(table, task, completed) {
-    const url = 'https://postgres.calebzaleski.com/update_task';
-
-    async function postUpdate(url) {
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ table, task, completed })
-            });
-
-            const data = await response.json();
-            console.log('Updated task:', data);
-
-        } catch (err) {
-            console.error('Error updating task:', err);
-            alert('Failed to update task');
-        }
-    }
-
-    postUpdate(url);
-}

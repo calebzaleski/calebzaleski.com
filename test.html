@@ -35,8 +35,7 @@
         <option value="stir_it_up_list">stir it up</option>
     </select>
 
-    <button onclick="addTask(); handleFetchWebsite()">Add Task</button>
-
+    <button onclick="(async () => { await addTask(); await handleFetchWebsite(); })">Add Task</button>
 
 
 

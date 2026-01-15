@@ -4,22 +4,31 @@
     <meta charset="UTF-8">
     <title>Website | Caleb Zaleski</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="cz.png">
-
-    <style>
-        .content {
-            text-align: center;
-        }
-
-    </style>
 </head>
 <body>
-<!-- Empty div for navbar -->
 <div id="navbar"></div>
-
-<!-- Your about page content -->
 <div class="content">
-    <h1>Plants!</h1>
-    <p>Plants</p>
+    <h1>WEBSITE</h1>
+    <p>
+        Here you can find everything that I am working on for this website.
+    </p>
 </div>
+
+<div class="todowrapper">
+
+        <div class="tasklist">
+            <input id="taskInput" type="text" placeholder="Enter task..." />
+            <button id="addTaskBtn">Add Task</button>
+            <button id="deleteCompletedBtn">Delete Completed Tasks</button>
+            <div class="tasklist" id="website_list"></div>
+        </div>
+</div>
+
 <script src="APIs.js"></script>
+<script src="tasklist.js"></script>
+<script>
+    initTodoPage('website_list');
+</script>
+
+</body>
+</html>

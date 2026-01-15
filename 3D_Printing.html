@@ -17,14 +17,30 @@
     </style>
 </head>
 <body>
-<!-- Empty div for navbar -->
+
 <div id="navbar"></div>
 
-<!-- Your about page content -->
 <div class="content">
+<h1>3D Printing</h1>
+    <p>
+        Here you can find everything that I am working on for my Creality Ender 5 3D printer at home.
+    </p>
 </div>
 
+<div class="todowrapper">
+    <div class="tasklist">
+        <input id="taskInput" type="text" placeholder="Enter task..." />
+        <button id="addTaskBtn">Add Task</button>
+        <button id="deleteCompletedBtn">Delete Completed Tasks</button>
+        <div class="tasklist" id="threedprinting_list"></div>
+    </div>
+</div>
 
 <script src="APIs.js"></script>
+<script src="tasklist.js"></script>
+<script>
+    initTodoPage('threedprinting_list');
+</script>
+
 </body>
 </html>

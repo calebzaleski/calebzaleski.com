@@ -14,12 +14,31 @@
     </style>
 </head>
 <body>
-<!-- Empty div for navbar -->
 <div id="navbar"></div>
 
-<!-- Your about page content -->
+
 <div class="content">
-    <h1>Recipes!</h1>
-    <p>food</p>
+<h1>Stir It Up</h1>
+    <p>
+        Here you can find everything that I am working on for my recipe app called Stir It Up (coming soon to the app store).
+    </p>
 </div>
+
+
+<div class="todowrapper">
+    <div class="tasklist">
+        <input id="taskInput" type="text" placeholder="Enter task..." />
+        <button id="addTaskBtn">Add Task</button>
+        <button id="deleteCompletedBtn">Delete Completed Tasks</button>
+        <div class="tasklist" id="stir_it_up_list"></div>
+    </div>
+</div>
+
 <script src="APIs.js"></script>
+<script src="tasklist.js"></script>
+<script>
+    initTodoPage('stir_it_up_list');
+</script>
+
+</body>
+</html>

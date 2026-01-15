@@ -8,6 +8,7 @@ function loadNavbar() {
 
 loadNavbar();
 
+
 function CurTime() {
     const d = new Date()
     return d.toLocaleTimeString();

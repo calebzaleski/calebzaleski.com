@@ -1,63 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>TEST PAGE</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="cz.png">
-
-    <style>
-        .content {
-            text-align: center;
-        }
-
-
-    </style>
-</head>
-<body>
-<!-- Empty div for navbar -->
-<div id="navbar"></div>
-
-<!-- Your about page content -->
-<div class="content">
-    <h1>This is the test page!</h1>
-
-
-    <input
-            type="text"
-            id="taskInput"
-            placeholder="Enter task..."
-    />
-
-    <select id="tableSelect">
-        <option value="website_list">website</option>
-        <option value="threedprinting_list">3d printing</option>
-        <option value="stir_it_up_list">stir it up</option>
-    </select>
-
-    <button onclick="(async () => { await addTask(); await handleFetchWebsite(); })()">Add Task</button>
-    <button onclick="submitTask(document.getElementById('tableSelect').value).then(() => handleFetchWebsite())">Delete Completed Tasks</button>
-    <div class="tasklist" id="website_list"></div>
-
+<div class="todowrapper">
+    <div class="tasklist">
+        <input id="taskInput" type="text" placeholder="Enter task..." />
+        <button id="addTaskBtn">Add Task</button>
+        <button id="deleteCompletedBtn">Delete Completed Tasks</button>
+        <div class="tasklist" id="website_list"></div>
+    </div>
 </div>
 
-<script>
-    const taskInput = document.getElementById("taskInput");
-
-    // Listen for Enter key
-    taskInput.addEventListener("keydown", async (event) => {
-        if (event.key === "Enter") {
-            event.preventDefault(); // prevent form submission if inside a form
-            await addTask();
-            await handleFetchWebsite();
-        }
-    });
-</script>
-
 <script src="APIs.js"></script>
-<script src="postgres.js"></script>
-
-<script>handleFetchWebsite() </script>
-
-</body>
-</html>
+<script src="tasklist.js"></script>
+<script>
+    initTodoPage('website_list');
+</script>

@@ -1,17 +1,47 @@
 /**
  * tasklist.js
  *
- * This file contains client-side JavaScript functions that interact with a backend
- * service hosted at https://postgres.calebzaleski.com. The backend is responsible
- * for managing task lists stored in a PostgreSQL database.
+ * Secure, generic client-side task list handler.
  *
- * The major functions in this file are:
- * - addTask: Adds a new task to a specified table in the backend.
- * - updateTask: Updates the completion status of a task in a specified table.
- * - fetch_all: Fetches all tasks/items from a specified table.
- * - handleFetchWebsite: Fetches tasks from the 'website_list' table and renders them as checkboxes in the DOM.
- * - handleFetchThreeDPrinting: Fetches items from the 'threedprinting_list' table and renders them as paragraphs in the DOM.
+ * This file contains client-side JavaScript functions that interact with a backend
+ * service hosted at https://postgres.calebzaleski.com. The backend manages task lists
+ * stored in a PostgreSQL database.
+ *
+ * 🔐 Security notes:
+ * - All user input is sanitized client-side via `sanitizeInput()` to mitigate XSS.
+ * - Tasks are rendered using programmatic DOM APIs (`createElement`, `createTextNode`)
+ *   instead of `innerHTML`, preventing DOM-based XSS.
+ * - No inline event handlers are used; all events are attached with `addEventListener`.
+ *
+ * Core functions:
+ * - sanitizeInput: Escapes unsafe characters from user input.
+ * - addTask: Adds a new task to a specified backend table.
+ * - updateTask: Updates completion state of a task by ID.
+ * - fetch_all: Fetches all tasks for a table from the backend.
+ * - genericFetchHandler: Safely renders tasks for any table.
+ * - initTodoPage: Wires a page to a task table and fetch handler.
  */
+
+/**
+ * Sanitizes user-provided input to reduce XSS risk.
+ *
+ * NOTE:
+ * - This is a defense-in-depth measure.
+ * - Backend must still escape or sanitize input independently.
+ *
+ * @param {string} input - Raw user input
+ * @returns {string} - Escaped and trimmed string safe for rendering
+ */
+function sanitizeInput(input) {
+    if (typeof input !== 'string') return '';
+    return input
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .trim();
+}
 
 /**
  * Adds a new task to a specified table in the backend.
@@ -23,12 +53,13 @@
  * - Alerts the user on success or failure.
  * - Clears the input field on success.
  * - Inserts the new task into the DOM immediately after successful addition.
+ * - Sanitizes user input before sending it to the backend.
  */
 async function addTask(table) {
     // Backend URL for adding a task
     const url = 'https://postgres.calebzaleski.com/add-task';
     // Retrieve task input value from DOM
-    const task = document.getElementById('taskInput').value;
+    const task = sanitizeInput(document.getElementById('taskInput').value);
     // Retrieve selected table name from DOM
     console.log('addTask called with value:', JSON.stringify(task));
 
@@ -182,6 +213,16 @@ function fetch_all(table) {
     return fetch_tasks(url);
 }
 
+/**
+ * Fetches and renders tasks for a given table using safe DOM operations.
+ *
+ * Security:
+ * - Does NOT use innerHTML.
+ * - Uses createElement / createTextNode to prevent XSS.
+ *
+ * @param {string} table - Backend table name and DOM container ID
+ * @returns {Promise<void>}
+ */
 async function genericFetchHandler(table) {
     const tasks = await fetch_all(table);
     const container = document.getElementById(table);
@@ -191,15 +232,28 @@ async function genericFetchHandler(table) {
         return;
     }
 
-    container.innerHTML = tasks.map(task =>
-        `<label data-id="${task.id}">
-        <input
-            type="checkbox"
-            ${task.completed ? 'checked' : ''}
-            onchange="updateTask('${table}', ${task.id}, this.checked)">
-        ${task.task}
-    </label>`
-    ).join('');
+    // Clear existing content safely
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
+    tasks.forEach(task => {
+        const label = document.createElement('label');
+        label.dataset.id = task.id;
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = !!task.completed;
+        checkbox.addEventListener('change', () => {
+            updateTask(table, task.id, checkbox.checked);
+        });
+
+        const textNode = document.createTextNode(task.task);
+
+        label.appendChild(checkbox);
+        label.appendChild(textNode);
+        container.appendChild(label);
+    });
 }
 
 //this is where the init starts

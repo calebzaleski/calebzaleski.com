@@ -216,18 +216,19 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
-    background-color: #b84a4a;
+    justify-content: center;
+    background-color: #397aca;
     border-radius: 6px;
     border-color: #0c0b0b;
-    margin: 100px 15px 15px 15px;
-    padding: 10px;
+    margin: 15px;
+    padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     font-family: Arial, sans-serif;
     font-weight: bolder;
-    width: 50vw;  /* Or a larger fixed width like 300px */
+    width: 75vw;  /* Or a larger fixed width like 300px */
     min-height: 1px;  /* Let it grow with content, or use min-height: 200px */
     height: auto;
+    opacity: 95%;
 
 }
 
@@ -236,8 +237,24 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     height: auto;
     z-index: 2;
 
+}
+.todocontent {
+    padding: 100px 5px 5px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.image-wrap {
+    display: flex;
+    flex-direction: column;
+
+}
+.recipe-img {
+    width: 75vw;
+    height: auto;
+    padding: 5px;
 }

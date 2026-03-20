@@ -1,26 +1,42 @@
 /* Base setup for sticky footer */
 html, body {
-    height: 100%;
-    margin: 0;
+    height: auto;
+    overflow-y: auto;
+
 }
 
 body {
+
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image : url(./coolbackgrounds-fractalize-sea_edge.png);
     background-size: cover;        /* fills screen */
-    background-position: center;   /* centers image */
-    background-repeat: no-repeat;  /* no tiling */
-    background-attachment: fixed;  /* optional: parallax feel */
+    /* centers image */
+    /* no tiling */
+    /* optional: parallax feel */
+    background: linear-gradient(to bottom right, #3c5060, #272733) no-repeat fixed center;
     font-family: Arial, sans-serif;
+    overflow-y: auto; /* Standard scrolling */
 
 
+
+}
+
+footer {
+    background-size: cover;        /* fills screen */
+    /* centers image */
+    /* no tiling */
+    /* optional: parallax feel */
+    background: linear-gradient(to bottom right, #3c5060, #272733) no-repeat fixed center;
+
+    display: flex;
+    justify-content: center;  /* horizontal centering */
 }
 
 /* Navbar styles - AT THE TOP */
 .navbar {
-    background: linear-gradient(to top right, #350202, #bd0e0e, #e1a6a6);
+    background-color: #dfdfdf;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Very light shadow */
     padding: 5px 30px;
     display: flex;
     align-items: center;
@@ -31,7 +47,6 @@ body {
     width: 100%;
     z-index: 3;
     box-sizing: border-box;
-    box-shadow: 0 4px 12px rgb(0, 0, 0);
 }
 
 .logo {
@@ -41,7 +56,7 @@ body {
 }
 
 .navbar a {
-    color: white;
+    color: #000000;
     text-decoration: none;
     padding: 10px 15px;
     font-size: 20px;
@@ -50,7 +65,7 @@ body {
 }
 
 .navbar a:hover {
-    background: black;
+    background-color: rgba(133, 133, 133, 0.71);
     border-radius: 5px;
     font-weight: bolder;
 
@@ -62,12 +77,13 @@ body {
     font-family: Arial, sans-serif;
     font-weight: bolder;
 
+
 }
 
 .dropdown-btn {
     background: none;
     border: none;
-    color: white;
+    color: #000000;
     padding: 10px 15px;
     cursor: pointer;
     font-size: 20px;
@@ -78,7 +94,7 @@ body {
 }
 
 .dropdown-btn:hover {
-    background: #0c0b0b;
+    background-color: rgba(133, 133, 133, 0.71);
     border-radius: 5px;
     font-family: Arial, sans-serif;
     font-weight: bolder;
@@ -90,7 +106,7 @@ body {
 .dropdown-content {
     display: none;
     position: absolute;
-    background: #1e1d1c;
+    background-color: #c5c5c5;
     min-width: 160px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     z-index: 1;
@@ -124,83 +140,55 @@ body {
 }
 
 /* Footer at bottom */
-footer {
-    background-image : url(./coolbackgrounds-fractalize-sea_edge.png);
-    background-size: cover;        /* fills screen */
-    background-position: center;   /* centers image */
-    background-repeat: no-repeat;  /* no tiling */
-    background-attachment: fixed;  /* optional: parallax feel */
-    margin-top: auto;
 
-    padding: 10px 0;
-    display: flex;
-    justify-content: center;  /* horizontal centering */
-}
-.displayboxmain1, .displayboxmain2 {
-    background-color: #ffffff;
-    border-radius: 7px 7px 0 0; /* Top-left, top-right, bottom-right, bottom-left */
-    margin: 15px 15px 0 15px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    z-index: 2;
-    padding: 0 10px 0 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    font-family: Arial, sans-serif;
-    font-weight: bolder;
-
-
-}
-
-.displayboxmain1 {
-    width: 323px;
-    height: 140px;
-}
-
-.displayboxmain2 {
-    width: 500px;
-    height: 140px;
-}
-
-.displayboxbottom1, .displayboxbottom2 {
-
-    background-color: #ffffff;
-    border-radius: 0 0 7px 7px;
-    margin: 0 15px 15px 15px;
-    border-top: none;
-    box-sizing: border-box;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    font-size: 24px;
-}
-
-.displayboxbottom1 {
-    width: 323px;
-    height: 35px;
-}
-
-.displayboxbottom2 {
-    width: 500px;
-    height: 35px;
-}
-
-.displayboxwrapper {
-    display: flex;
-    flex-direction: column;
-}
-
+/* Container for rows */
 #row, #row2, #row3 {
     display: flex;
     justify-content: center;
-    gap: 5px;
+    align-items: center; /* Ensures everything sits flat */
+    gap: 0; /* Remove gap here, we handle it with margins */
+}
+
+/* The Wrapper MUST define the width to keep alignment */
+.displayboxwrapper {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 7px;
+    overflow: hidden;
+    margin: 20px; /* This creates the space between cards */
+}
+
+/* Specific Widths to match your design */
+.displayboxmain1, .displayboxbottom1 { width: 323px; }
+.displayboxmain2, .displayboxbottom2 { width: 500px; }
+
+/* Content Logic */
+.displayboxmain1, .displayboxmain2 {
+    background-color: #dfdfdf;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    padding: 0 20px; /* Padding inside, NOT width */
+    box-sizing: border-box;
+}
+
+.displayboxbottom1, .displayboxbottom2 {
+    background-color: #c8c8c8;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-sizing: border-box;
 }
 
 link[rel="icon"] {

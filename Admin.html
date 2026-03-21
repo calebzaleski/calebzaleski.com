@@ -29,9 +29,9 @@
 
   <div class="todowrapper">
     <div class="tasklist">
-      <input id="taskInput" type="text" placeholder="Enter task...">
-      <button id="addTaskBtn">Add Task</button>
-      <button id="deleteCompletedBtn">Delete Completed Tasks</button>
+      <input class="taskInput" type="text" placeholder="Enter task...">
+      <button class="addTaskBtn">Add Task</button>
+      <button class="deleteCompletedBtn">Delete Completed Tasks</button>
       <div class="tasklist" id="threedprinting_list"></div>
     </div>
   </div>
@@ -47,9 +47,9 @@
 
   <div class="todowrapper">
     <div class="tasklist">
-      <input id="taskInput" type="text" placeholder="Enter task...">
-      <button id="addTaskBtn">Add Task</button>
-      <button id="deleteCompletedBtn">Delete Completed Tasks</button>
+      <input class="taskInput" type="text" placeholder="Enter task...">
+      <button class="addTaskBtn">Add Task</button>
+      <button class="deleteCompletedBtn">Delete Completed Tasks</button>
       <div class="tasklist" id="stir_it_up_list"></div>
     </div>
   </div>
@@ -64,9 +64,9 @@
 
   <div class="todowrapper">
     <div class="tasklist">
-      <input id="taskInput" type="text" placeholder="Enter task...">
-      <button id="addTaskBtn">Add Task</button>
-      <button id="deleteCompletedBtn">Delete Completed Tasks</button>
+      <input class="taskInput" type="text" placeholder="Enter task...">
+      <button class="addTaskBtn">Add Task</button>
+      <button class="deleteCompletedBtn">Delete Completed Tasks</button>
       <div class="tasklist" id="website_list"></div>
     </div>
   </div>
@@ -76,9 +76,14 @@
 <script src="APIs.js"></script>
 <script src="tasklist.js"></script>
 <script>
-  initTodoPage('threedprinting_list');
-  initTodoPage('stir_it_up_list');
-  initTodoPage('website_list');
+  // Find each .todowrapper and call initTodoPage with the correct table and wrapper
+  document.querySelectorAll('.todowrapper').forEach(wrapper => {
+    // Find the table id for the tasklist inside this wrapper
+    const tableDiv = wrapper.querySelector('.tasklist[id]');
+    if (tableDiv) {
+      initTodoPage(tableDiv.id, undefined, wrapper);
+    }
+  });
 </script>
 
 </body>

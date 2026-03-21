@@ -55,12 +55,12 @@ function sanitizeInput(input) {
  * - Inserts the new task into the DOM immediately after successful addition.
  * - Sanitizes user input before sending it to the backend.
  */
-async function addTask(table) {
+async function addTask(table, wrapper) {
     // Backend URL for adding a task
     const url = 'https://proxy.calebzaleski.com/add-task';
-    // Retrieve task input value from DOM
-    const task = sanitizeInput(document.getElementById('taskInput').value);
-    // Retrieve selected table name from DOM
+    // Retrieve task input value from wrapper
+    const inputEl = wrapper.querySelector('.taskInput');
+    const task = sanitizeInput(inputEl ? inputEl.value : '');
     console.log('addTask called with value:', JSON.stringify(task));
 
     // Validate input: ensure task is not empty or whitespace
@@ -77,33 +77,17 @@ async function addTask(table) {
             },
             body: JSON.stringify({table, task})
         });
-
         const data = await response.json();
         console.log('AddTask response:', data);
 
-        if (!data.inserted || !data.inserted.id) {
+        if (!data.inserted) {
             return alert('Backend did not return a valid inserted task');
         }
 
-        document.getElementById('taskInput').value = '';
+        if (inputEl) inputEl.value = '';
 
-        const container = document.getElementById(table);
-        if (!container) {
-            console.error(`Container with id '${table}' not found`);
-            return;
-        }
-        const label = document.createElement('label');
-        label.dataset.id = data.inserted.id;
-
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.checked = data.inserted.completed;
-        checkbox.addEventListener('change', () => updateTask(table, data.inserted.id, checkbox.checked));
-
-        label.appendChild(checkbox);
-        label.appendChild(document.createTextNode(data.inserted.task));
-
-        container.appendChild(label);
+        // We don't need to manually create labels/checkboxes here
+        // because refresh() is called immediately after in initTodoPage
 
     } catch (err) {
         console.error('Error adding task:', err);
@@ -290,7 +274,7 @@ function initTodoPage(wrapper, table, fetchHandler = genericFetchHandler) {
 
     addTaskBtn.onclick = async () => {
         console.log('Add button clicked, table:', table);
-        await addTask(table);
+        await addTask(table, wrapper);
         console.log('Task added, refreshing...');
         await refresh();
     };
@@ -303,7 +287,7 @@ function initTodoPage(wrapper, table, fetchHandler = genericFetchHandler) {
     taskInput.addEventListener("keydown", async (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
-            await addTask(table);
+            await addTask(table, wrapper);
             await refresh();
         }
     });

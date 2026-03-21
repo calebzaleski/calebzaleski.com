@@ -304,3 +304,49 @@ function initTodoPage(table, fetchHandler = genericFetchHandler) {
     // Initial load
     refresh();
 }
+
+async function readOnlyFetchHandler(table) {
+    const tasks = await fetch_all(table);
+    const container = document.getElementById(table);
+
+    if (!container) {
+        console.error(`Container with id '${table}' not found`);
+        return;
+    }
+
+    // Clear existing content
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
+    // Create a UL for bullet points
+    const list = document.createElement('ul');
+
+    tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.dataset.id = task.id;
+
+        const textNode = document.createTextNode(task.task);
+        li.appendChild(textNode);
+
+        list.appendChild(li);
+    });
+
+    container.appendChild(list);
+}
+
+function initROTodoPage(table, fetchHandler = readOnlyFetchHandler){
+    console.log('Init Read-Only page called with table:', table);
+
+    async function refresh() {
+        try {
+            await fetchHandler(table);
+            console.log('Read-only data loaded successfully.');
+        } catch (error) {
+            console.error("Error loading read-only data:", error);
+        }
+    }
+
+    // Initial load only - no event listeners or button logic
+    refresh();
+}

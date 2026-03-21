@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin | Caleb Zaleski</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="cz.png">
+
+  <style>
+    .content {
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="navbar"></div>
+
+<div class="todocontent">
+  <h1>3D Printing</h1>
+  <p>
+    Here you can find everything that I am working on for my Creality Ender 5 3D printer at home.
+  </p>
+
+
+  <div class="todowrapper">
+    <div class="tasklist">
+      <input id="taskInput" type="text" placeholder="Enter task...">
+      <button id="addTaskBtn">Add Task</button>
+      <button id="deleteCompletedBtn">Delete Completed Tasks</button>
+      <div class="tasklist" id="threedprinting_list"></div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="todocontent">
+  <h1>Stir It Up</h1>
+  <p>
+  </p>
+
+
+  <div class="todowrapper">
+    <div class="tasklist">
+      <input id="taskInput" type="text" placeholder="Enter task...">
+      <button id="addTaskBtn">Add Task</button>
+      <button id="deleteCompletedBtn">Delete Completed Tasks</button>
+      <div class="tasklist" id="stir_it_up_list"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="todocontent">
+  <h1>Website</h1>
+  <p>
+  </p>
+
+
+  <div class="todowrapper">
+    <div class="tasklist">
+      <input id="taskInput" type="text" placeholder="Enter task...">
+      <button id="addTaskBtn">Add Task</button>
+      <button id="deleteCompletedBtn">Delete Completed Tasks</button>
+      <div class="tasklist" id="website_list"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="APIs.js"></script>
+<script src="tasklist.js"></script>
+<script>
+  initTodoPage('threedprinting_list');
+  initTodoPage('stir_it_up_list');
+  initTodoPage('website_list');
+</script>
+
+</body>
+</html>

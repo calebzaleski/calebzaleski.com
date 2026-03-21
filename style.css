@@ -19,7 +19,6 @@ body {
     overflow-y: auto; /* Standard scrolling */
 
 
-
 }
 
 footer {
@@ -40,7 +39,7 @@ footer {
     padding: 5px 30px;
     display: flex;
     align-items: center;
-    gap: 30px;
+    /*gap: 30px; */
     position: fixed;
     top: 0;
     left: 0;
@@ -52,10 +51,9 @@ footer {
 .logo {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
 }
 
-.navbar a {
+.navbar a, h3{
     color: #000000;
     text-decoration: none;
     padding: 10px 15px;
@@ -63,7 +61,15 @@ footer {
     font-family: Arial, sans-serif;
     font-weight: bolder;
 }
+.navbarleft {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    flex-grow: 1;            /* Add this: forces the div to take up all available width */
+    letter-spacing: 5px;
 
+}
 .navbar a:hover {
     background-color: rgba(133, 133, 133, 0.71);
     border-radius: 5px;
@@ -89,7 +95,6 @@ footer {
     font-size: 20px;
     font-family: Arial, sans-serif;
     font-weight: bolder;
-
 
 }
 
@@ -213,11 +218,22 @@ h1 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     font-family: Arial, sans-serif;
     font-weight: bolder;
+    font-size: 16px;
     width: 75vw;  /* Or a larger fixed width like 300px */
     min-height: 1px;  /* Let it grow with content, or use min-height: 200px */
     height: auto;
     opacity: 95%;
 
+}
+
+
+#threedprinting_list ul li, #stir_it_up_list ul li, #website_list ul li {
+    margin: 8px 0;        /* space between items */
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .todowrapper {

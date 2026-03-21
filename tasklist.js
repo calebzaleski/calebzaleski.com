@@ -72,7 +72,11 @@ async function addTask(table) {
     try {
         const response = await fetch(url, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json',
+                'CF-Access-Client-Id': process.env.CF_CLIENT_ID,
+                'CF-Access-Client-Secret': process.env.CF_CLIENT_SECRET
+            },
             body: JSON.stringify({table, task})
         });
 
@@ -140,7 +144,11 @@ function updateTask(table, id, completed) {
             // Send POST request with JSON payload containing table, id, and completed status
             const response = await fetch(url, {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {
+                    'Content-Type': 'application/json',
+                    'CF-Access-Client-Id': process.env.CF_CLIENT_ID,
+                    'CF-Access-Client-Secret': process.env.CF_CLIENT_SECRET
+                },
                 body: JSON.stringify({table, id, completed}) // Changed from task to id
             });
             // No need to parse the JSON response here
@@ -159,7 +167,11 @@ function updateTask(table, id, completed) {
 function submitTask(table) {
     return fetch('https://postgrespush.calebzaleski.com/delete_completed_tasks', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'CF-Access-Client-Id': process.env.CF_CLIENT_ID,
+            'CF-Access-Client-Secret': process.env.CF_CLIENT_SECRET
+        },
         body: JSON.stringify({table})
     });
 }

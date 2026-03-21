@@ -57,7 +57,7 @@ function sanitizeInput(input) {
  */
 async function addTask(table) {
     // Backend URL for adding a task
-    const url = 'https://postgrespush.calebzaleski.com/add-task';
+    const url = 'https://proxy.calebzaleski.com/add-task';
     // Retrieve task input value from DOM
     const task = sanitizeInput(document.getElementById('taskInput').value);
     // Retrieve selected table name from DOM
@@ -73,9 +73,7 @@ async function addTask(table) {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'CF-Access-Client-Id': process.env.CF_CLIENT_ID,
-                'CF-Access-Client-Secret': process.env.CF_CLIENT_SECRET
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({table, task})
         });
@@ -131,7 +129,7 @@ async function addTask(table) {
  */
 function updateTask(table, id, completed) {
     // Backend URL for updating a task
-    const url = 'https://postgrespush.calebzaleski.com/update_task';
+    const url = 'https://proxy.calebzaleski.com/update-task';
 
     /**
      * Sends a POST request to update the task's completion status.
@@ -145,9 +143,7 @@ function updateTask(table, id, completed) {
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'CF-Access-Client-Id': process.env.CF_CLIENT_ID,
-                    'CF-Access-Client-Secret': process.env.CF_CLIENT_SECRET
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({table, id, completed}) // Changed from task to id
             });
@@ -165,12 +161,10 @@ function updateTask(table, id, completed) {
 
 
 function submitTask(table) {
-    return fetch('https://postgrespush.calebzaleski.com/delete_completed_tasks', {
+    return fetch('https://proxy.calebzaleski.com/delete-completed-tasks', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'CF-Access-Client-Id': process.env.CF_CLIENT_ID,
-            'CF-Access-Client-Secret': process.env.CF_CLIENT_SECRET
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({table})
     });

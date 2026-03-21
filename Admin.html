@@ -76,12 +76,12 @@
 <script src="APIs.js"></script>
 <script src="tasklist.js"></script>
 <script>
-  // Find each .todowrapper and call initTodoPage with the correct table and wrapper
+  // For each .todowrapper, call initTodoPage with the wrapper and corresponding table id
   document.querySelectorAll('.todowrapper').forEach(wrapper => {
-    // Find the table id for the tasklist inside this wrapper
+    // Find the tasklist div inside this wrapper for the table id
     const tableDiv = wrapper.querySelector('.tasklist[id]');
     if (tableDiv) {
-      initTodoPage(tableDiv.id, undefined, wrapper);
+      initTodoPage(wrapper, tableDiv.id);
     }
   });
 </script>

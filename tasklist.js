@@ -55,17 +55,11 @@ function sanitizeInput(input) {
  * - Inserts the new task into the DOM immediately after successful addition.
  * - Sanitizes user input before sending it to the backend.
  */
-async function addTask(table, wrapper) {
+async function addTask(table) {
     // Backend URL for adding a task
     const url = 'https://proxy.calebzaleski.com/add-task';
-    // Retrieve task input value from DOM (scoped to wrapper if provided)
-    let taskInputElem;
-    if (wrapper) {
-        taskInputElem = wrapper.querySelector('.taskInput');
-    } else {
-        taskInputElem = document.querySelector('.taskInput');
-    }
-    const task = sanitizeInput(taskInputElem ? taskInputElem.value : '');
+    // Retrieve task input value from DOM
+    const task = sanitizeInput(document.getElementById('taskInput').value);
     // Retrieve selected table name from DOM
     console.log('addTask called with value:', JSON.stringify(task));
 
@@ -91,7 +85,7 @@ async function addTask(table, wrapper) {
             return alert('Backend did not return a valid inserted task');
         }
 
-        if (taskInputElem) taskInputElem.value = '';
+        document.getElementById('taskInput').value = '';
 
         const container = document.getElementById(table);
         if (!container) {
@@ -269,18 +263,11 @@ async function genericFetchHandler(table) {
 }
 
 //this is where the init starts
-function initTodoPage(table, fetchHandler = genericFetchHandler, wrapper) {
-    // wrapper is required to scope the elements correctly
-    let taskInput, addTaskBtn, deleteCompletedBtn;
-    if (wrapper) {
-        taskInput = wrapper.querySelector('.taskInput');
-        addTaskBtn = wrapper.querySelector('.addTaskBtn');
-        deleteCompletedBtn = wrapper.querySelector('.deleteCompletedBtn');
-    } else {
-        taskInput = document.querySelector('.taskInput');
-        addTaskBtn = document.querySelector('.addTaskBtn');
-        deleteCompletedBtn = document.querySelector('.deleteCompletedBtn');
-    }
+// Modified to accept wrapper element and table id, and scope queries to the wrapper
+function initTodoPage(wrapper, table, fetchHandler = genericFetchHandler) {
+    const taskInput = wrapper.querySelector(".taskInput");
+    const addTaskBtn = wrapper.querySelector(".addTaskBtn");
+    const deleteCompletedBtn = wrapper.querySelector(".deleteCompletedBtn");
 
     console.log('Init called with table:', table);
     console.log("initTodoPage called", {
@@ -290,7 +277,7 @@ function initTodoPage(table, fetchHandler = genericFetchHandler, wrapper) {
     });
 
     if (!taskInput || !addTaskBtn || !deleteCompletedBtn) {
-        console.warn("Todo elements not found on this page. Skipping init.");
+        console.warn("Todo elements not found in wrapper. Skipping init.");
         return;
     }
 
@@ -303,7 +290,7 @@ function initTodoPage(table, fetchHandler = genericFetchHandler, wrapper) {
 
     addTaskBtn.onclick = async () => {
         console.log('Add button clicked, table:', table);
-        await addTask(table, wrapper);
+        await addTask(table);
         console.log('Task added, refreshing...');
         await refresh();
     };
@@ -316,7 +303,7 @@ function initTodoPage(table, fetchHandler = genericFetchHandler, wrapper) {
     taskInput.addEventListener("keydown", async (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
-            await addTask(table, wrapper);
+            await addTask(table);
             await refresh();
         }
     });

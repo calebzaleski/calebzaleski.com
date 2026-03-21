@@ -177,7 +177,7 @@ function submitTask(table) {
  */
 function fetch_all(table) {
     // Backend URL for fetching all tasks/items
-    const url = 'https://postgres.calebzaleski.com/fetch_all';
+    const url = 'https://postgrespull.calebzaleski.com/fetch_all';
 
     /**
      * Sends a POST request to fetch tasks from the backend.

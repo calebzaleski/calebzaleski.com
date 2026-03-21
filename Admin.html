@@ -78,8 +78,8 @@
 <script>
   // For each .todowrapper, call initTodoPage with the wrapper and corresponding table id
   document.querySelectorAll('.todowrapper').forEach(wrapper => {
-    // Find the tasklist div inside this wrapper for the table id
-    const tableDiv = wrapper.querySelector('.tasklist[id]');
+    // The div inside wrapper with the actual table id
+    const tableDiv = wrapper.querySelector('div[id]');
     if (tableDiv) {
       initTodoPage(wrapper, tableDiv.id);
     }

@@ -9,7 +9,6 @@ body {
 
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     background-size: cover;        /* fills screen */
     /* centers image */
     /* no tiling */
@@ -135,12 +134,12 @@ footer {
 /* Content needs padding at top and flex-grow to push footer down */
 .content {
     padding: 5px;
-    margin-top: 110px;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 110px;
 
 }
 

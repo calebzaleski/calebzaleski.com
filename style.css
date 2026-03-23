@@ -35,7 +35,7 @@ footer {
 .navbar {
     background-color: #dfdfdf;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Very light shadow */
-    padding: 5px 30px;
+    padding: 5px 10px;
     display: flex;
     align-items: center;
     /*gap: 30px; */
@@ -55,8 +55,8 @@ footer {
 .navbar a, h3{
     color: #000000;
     text-decoration: none;
-    padding: 10px 15px;
-    font-size: 20px;
+    padding: 10px 5px;
+    font-size: clamp(12px, 1.5vw, 20px);
     font-family: Arial, sans-serif;
     font-weight: bolder;
 }
@@ -91,7 +91,7 @@ footer {
     color: #000000;
     padding: 10px 15px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: clamp(12px, 1.5vw, 20px);
     font-family: Arial, sans-serif;
     font-weight: bolder;
 
@@ -160,23 +160,27 @@ footer {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     border-radius: 7px;
     overflow: hidden;
+    align-items: center;
     margin: 20px; /* This creates the space between cards */
+
 }
 
 /* Specific Widths to match your design */
-.displayboxmain1, .displayboxbottom1 { width: 323px; }
-.displayboxmain2, .displayboxbottom2 { width: 500px; }
+.displayboxmain1, .displayboxbottom1 { width:clamp(16vw, 19vw, 30vw); height: 140px;}
+.displayboxmain2, .displayboxbottom2 { width:clamp(31vw, 31vw, 32vw); height: 140px;}
 
 /* Content Logic */
 .displayboxmain1, .displayboxmain2 {
     background-color: #dfdfdf;
-    height: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     font-family: Arial, sans-serif;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: clamp(10px, 1.5vw, 20px);
+    text-transform: uppercase;
+
     padding: 0 20px; /* Padding inside, NOT width */
     box-sizing: border-box;
 }
@@ -189,7 +193,7 @@ footer {
     justify-content: center;
     font-family: Arial, sans-serif;
     font-weight: 800;
-    font-size: 14px;
+    font-size: clamp(8px, 2vw, 18px);
     text-transform: uppercase;
     letter-spacing: 1px;
     box-sizing: border-box;

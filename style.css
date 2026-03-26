@@ -21,6 +21,7 @@ body {
 }
 
 footer {
+    margin-top: 50vh;
     background-size: cover;        /* fills screen */
     /* centers image */
     /* no tiling */
@@ -35,7 +36,8 @@ footer {
 .navbar {
     background-color: #dfdfdf;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Very light shadow */
-    padding: 5px 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     display: flex;
     align-items: center;
     /*gap: 30px; */
@@ -48,17 +50,19 @@ footer {
 }
 
 .logo {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+    padding-right: 10px;
 }
 
 .navbar a, h3{
     color: #000000;
     text-decoration: none;
-    padding: 10px 5px;
-    font-size: clamp(12px, 1.5vw, 20px);
-    font-family: Arial, sans-serif;
-    font-weight: bolder;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: clamp(16px, 2vw, 24px);
+    font-family: "math", sans-serif;
+    font-weight: bold;
 }
 .navbarleft {
     display: flex;
@@ -71,16 +75,18 @@ footer {
 }
 .navbar a:hover {
     background-color: rgba(133, 133, 133, 0.71);
-    border-radius: 5px;
-    font-weight: bolder;
+    border-radius: 10px;
+    font-size: clamp(16px, 2vw, 24px);
+    font-family: "math", sans-serif;
+    font-weight: bold;
 
 }
 
 .dropdown {
     position: relative;
     display: inline-block;
-    font-family: Arial, sans-serif;
-    font-weight: bolder;
+    font-family: math, sans-serif;
+    font-weight: bold;
 
 
 }
@@ -91,17 +97,19 @@ footer {
     color: #000000;
     padding: 10px 15px;
     cursor: pointer;
-    font-size: clamp(12px, 1.5vw, 20px);
-    font-family: Arial, sans-serif;
-    font-weight: bolder;
+    font-size: clamp(16px, 2vw, 24px);
+    font-family: "math", sans-serif;
+
+    font-weight: bold;
 
 }
 
 .dropdown-btn:hover {
     background-color: rgba(133, 133, 133, 0.71);
     border-radius: 5px;
-    font-family: Arial, sans-serif;
-    font-weight: bolder;
+    font-size: clamp(16px, 2vw, 24px);
+    font-family: "math", sans-serif;
+    font-weight: bold;
 
 
 
@@ -114,8 +122,7 @@ footer {
     min-width: 160px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     z-index: 1;
-    font-family: Arial, sans-serif;
-    font-weight: bolder;
+
 
 
 }
@@ -123,7 +130,9 @@ footer {
 .dropdown-content a {
     display: block;
     padding: 12px 16px;
-    font-family: Arial, sans-serif;
+    font-size: clamp(16px, 2vw, 24px);
+    font-family: "math", sans-serif;
+    font-weight: bolder;
 
 }
 
@@ -264,4 +273,47 @@ h1 {
     width: 75vw;
     height: auto;
     padding: 5px;
+}
+
+.aboutpageimg {
+    width: clamp(20vw, 30vw, 35vw);
+    height: auto;
+    border-radius: 10px;
+
+
+}
+.aboutpage {
+    margin-top: 100px;
+    display: flex;
+    align-items: flex-start; /* Forces children to align to the top */
+    padding-left: 1vw;
+    padding-right: 1vw;
+    gap: 20px; /* Adds space between the image and the text wrapper */
+
+
+}
+
+.aboutpage p {
+    font-size: clamp(12px, 3vw, 24px);
+    color: #979797;
+    font-weight: 800;
+    font-family: Arial, sans-serif;
+}
+
+.aboutpage h1 {
+    font-size: clamp(16px, 4vw, 36px);
+    color: #000000;
+    font-weight: 1200;
+    font-family: "Apple Chancery", sans-serif;
+
+}
+
+.aboutpagetextwrapper {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
 }

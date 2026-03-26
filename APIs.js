@@ -72,3 +72,23 @@ function NOTD(elementId) {
     getapi(url);
 }
 
+function FBGRX(elementId) {
+    const url = 'https://proxy.calebzaleski.com/stock/FBGRX';
+
+    async function getapi(url)
+    {
+        const response = await fetch(url);
+        var data = await response.json();
+        console.log(data);
+
+        const no = data.reason;
+
+        document.getElementById(elementId).textContent =
+            `"${price}"`;
+    }
+
+    getapi(url);
+}
+
+
+

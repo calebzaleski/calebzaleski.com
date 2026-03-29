@@ -81,7 +81,8 @@ function FBGRX(elementId) {
         var data = await response.json();
         console.log(data);
 
-        const no = data.reason;
+        const price = data?.["Global Quote"]?.["05. price"];
+
 
         document.getElementById(elementId).textContent =
             `"${price}"`;

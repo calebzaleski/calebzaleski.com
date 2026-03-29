@@ -14,16 +14,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' https://main.calebzaleski.com https://static.cloudflareinsights.com;
+    script-src 'self' 'unsafe-inline' https://main.calebzaleski.com https://static.cloudflareinsights.com;
+    style-src 'self' 'unsafe-inline';
     connect-src 'self'
         https://proxy.calebzaleski.com
         https://quoteoftheday.calebzaleski.com
         https://beta.ourmanna.com
         https://noas.calebzaleski.com;
-    style-src 'self';
-    img-src 'self' data:;
+    img-src 'self' data: https://img.shields.io;
     font-src 'self';
-    frame-ancestors 'self';
     base-uri 'self';
 ">
     <title>Home | Caleb Zaleski</title>

@@ -84,7 +84,7 @@ function Stock(symbol) {
         const price = data?.["Global Quote"]?.["05. price"];
 
         document.getElementById(symbol).textContent =
-            `${symbol}: ${Number(price).toFixed(1)}`;
+            `${symbol}: $${Number(price).toFixed(1)}`;
     }
 
     getapi(url);

@@ -72,8 +72,8 @@ function NOTD(elementId) {
     getapi(url);
 }
 
-function FBGRX(elementId) {
-    const url = 'https://proxy.calebzaleski.com/stock/FBGRX';
+function Stock(symbol) {
+    const url = `https://proxy.calebzaleski.com/stock/${symbol}`;
 
     async function getapi(url)
     {
@@ -83,13 +83,9 @@ function FBGRX(elementId) {
 
         const price = data?.["Global Quote"]?.["05. price"];
 
-
-        document.getElementById(elementId).textContent =
-            `"${price}"`;
+        document.getElementById(symbol).textContent =
+            `${symbol}: ${Number(price).toFixed(1)}`;
     }
 
     getapi(url);
 }
-
-
-

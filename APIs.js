@@ -83,8 +83,9 @@ function Stock(symbol) {
 
         const price = data?.["Global Quote"]?.["05. price"];
 
+        const displayPrice = !isNaN(parseFloat(price)) ? parseFloat(price).toFixed(1) : 'N/A';
         document.getElementById(symbol).textContent =
-            `${symbol}: $${Number(price).toFixed(1)}`;
+            `${symbol}: $${displayPrice}`;
     }
 
     getapi(url);

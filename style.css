@@ -325,6 +325,12 @@ h1 {
     font-weight: 800;
 
 }
+.displayboxmain1 button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:clamp(12vw, 15vw, 20vw); height: 70px
+ }
 
 .bookmarkbar {
     display: flex;

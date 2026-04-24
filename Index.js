@@ -8,14 +8,10 @@ function loadNavbar() {
 
 loadNavbar();
 
-
 function CurTime() {
     const d = new Date()
     return d.toLocaleTimeString();
 }
-
-
-
 
 function QOTD(elementId) {
     const url = "https://quoteoftheday.calebzaleski.com/daily_quote";
@@ -32,7 +28,6 @@ function QOTD(elementId) {
 
     getapi(url);
 }
-
 
 function VOTD(elementId) {
     const url = 'https://beta.ourmanna.com/api/v1/get?format=json&order=daily';
@@ -91,9 +86,6 @@ function Stock(symbol) {
     getapi(url);
 }
 
-
-
-
 function ranphonetic() {
 
     const phoneticAlphabet = [
@@ -125,30 +117,33 @@ function ranphonetic() {
         'Zulu'
     ];
 
-   let item = Math.floor(Math.random() * 26) + 1;
+   let item = Math.floor(Math.random() * 26);
    let letter = phoneticAlphabet[item];
     console.log(letter[0]);
    let completed = false
    let iterations = 0;
+   let score = 0;
 
     while (!completed) {
-        let userword = prompt(`Please full word for letter '${letter[0]}': `);
+        let userword = prompt(`Please enter the word for the letter corresponding to '${letter[0]}': `);
 
-        if (userword === null) {
+        if (userword.trim().toLowerCase() === null) {
             alert(`The answer was ${phoneticAlphabet[item]}`);
             break;
         }
 
-        if (userword === phoneticAlphabet[item]) {
+        if (userword.trim().toLowerCase() === phoneticAlphabet[item].toLowerCase()) {
             alert("Correct!");
             completed = true;
+            return 1;
         }
 
         else {
             iterations++;
-            if (iterations >= 3) {
+            if (iterations >= 2) {
                 alert(`The answer was ${phoneticAlphabet[item]}`);
-                break;
+                return 0;
+
             }
             else {
                 alert("Try again!");
@@ -158,3 +153,14 @@ function ranphonetic() {
     }
 }
 
+function askTimes() {
+    let times = parseInt(prompt("How many questions would you like?"), 10);
+    let score = 0;
+
+    if (!isNaN(times) && times > 0) {
+        for (let i = 0; i < times; i++) {
+            score += ranphonetic()
+        }
+    }
+    alert(`your score is ${score}/${times}`)
+}

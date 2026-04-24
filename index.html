@@ -3,7 +3,7 @@
   Home Page: calebzaleski.com
   Dependencies:
   - style.css for all layout and visual styling
-  - APIs.js for fetching and updating dynamic content
+  - Index.js for fetching and updating dynamic content
   - Navbar is injected dynamically into #navbar
 -->
 <html lang="en">
@@ -54,7 +54,7 @@
   Row 1:
   - Verse of the Day (VOTD)
   - Quote of the Day (QOTD)
-  Data is populated from APIs.js
+  Data is populated from Index.js
 --><div id="row">
     <div class="displayboxwrapper">
         <div class="displayboxmain2">
@@ -118,7 +118,16 @@
   Placeholder widgets for future expansion
   (metrics, stats, or custom tools)
 -->
-<!--<div id="row3">
+<div id="row3">
+    <div class="displayboxwrapper">
+        <div class="displayboxmain1">
+            <button onclick="ranphonetic()">Phonetic Alphabet Quiz</button>
+        </div>
+        <div class="displayboxbottom1">
+            <p>title</p>
+        </div>
+    </div>
+<!--
     <div class="displayboxwrapper">
         <div class="displayboxmain1">
             <p>coming soon</p>
@@ -135,17 +144,8 @@
         <div class="displayboxbottom1">
             <p>title</p>
         </div>
-    </div>
-
-    <div class="displayboxwrapper">
-        <div class="displayboxmain1">
-            <p>coming soon</p>
-        </div>
-        <div class="displayboxbottom1">
-            <p>title</p>
-        </div>
-    </div>
-</div> -->
+    </div> -->
+</div>
 
 
 
@@ -165,14 +165,14 @@
 
 
 
-<!-- APIs.js:
+<!-- Index.js:
      - CurTime()  -> returns formatted current time
      - QOTD(id)   -> injects Quote of the Day into element
      - VOTD(id)   -> injects Verse of the Day into element
      - NOTD(id)   -> injects "Just Say No" message
 -->
-<!-- Load your APIs.js -->
-<script src="APIs.js"></script>
+<!-- Load your Index.js -->
+<script src="Index.js"></script>
 
 <!-- Initialize everything -->
 <script>

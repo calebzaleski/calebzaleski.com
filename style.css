@@ -317,3 +317,15 @@ h1 {
     align-items: flex-start;
     justify-content: center;
 }
+
+.bookmarkbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.bookmark {
+    width: 50%;
+    height: 50%;
+}

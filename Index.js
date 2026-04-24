@@ -90,3 +90,66 @@ function Stock(symbol) {
 
     getapi(url);
 }
+
+
+
+
+function ranphonetic() {
+
+    const phoneticAlphabet = [
+        'Alpha',
+        'Bravo',
+        'Charlie',
+        'Delta',
+        'Echo',
+        'Foxtrot',
+        'Golf',
+        'Hotel',
+        'India',
+        'Juliett',
+        'Kilo',
+        'Lima',
+        'Mike',
+        'November',
+        'Oscar',
+        'Papa',
+        'Quebec',
+        'Romeo',
+        'Sierra',
+        'Tango',
+        'Uniform',
+        'Victor',
+        'Whiskey',
+        'X-ray',
+        'Yankee',
+        'Zulu'
+    ];
+
+   let item = Math.floor(Math.random() * 26) + 1;
+   let letter = phoneticAlphabet[item];
+    console.log(letter[0]);
+   let completed = false
+   let iterations = 0;
+
+    while (!completed) {
+        let userword = prompt(`Please full word for letter '${letter[0]}': `);
+        if (userword === phoneticAlphabet[item]) {
+            alert("Correct!");
+            completed = true;
+        }
+        if (userword !== phoneticAlphabet[item] && userword !== null && iterations <= 3) {
+            alert("try again!");
+            iterations++;
+        }
+        if (iterations >= 3 && userword !== null) {
+            alert(`The answer was ${phoneticAlphabet[item]}`);
+        }
+        if (userword === null) {
+            alert(`The answer was ${phoneticAlphabet[item]}`);
+            break;
+        }
+
+
+    }
+}
+

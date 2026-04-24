@@ -317,6 +317,14 @@ h1 {
     align-items: flex-start;
     justify-content: center;
 }
+.aboutpagetextwrapper a {
+    text-decoration: underline;
+    color: #979797;
+    font-size: clamp(12px, 3vw, 24px);
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+
+}
 
 .bookmarkbar {
     display: flex;

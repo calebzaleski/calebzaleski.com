@@ -133,23 +133,28 @@ function ranphonetic() {
 
     while (!completed) {
         let userword = prompt(`Please full word for letter '${letter[0]}': `);
-        if (userword === phoneticAlphabet[item]) {
-            alert("Correct!");
-            completed = true;
-        }
-        if (userword !== phoneticAlphabet[item] && userword !== null && iterations <= 3) {
-            alert("try again!");
-            iterations++;
-        }
-        if (iterations >= 3 && userword !== null) {
-            alert(`The answer was ${phoneticAlphabet[item]}`);
-        }
+
         if (userword === null) {
             alert(`The answer was ${phoneticAlphabet[item]}`);
             break;
         }
 
+        if (userword === phoneticAlphabet[item]) {
+            alert("Correct!");
+            completed = true;
+        }
 
+        else {
+            iterations++;
+            if (iterations >= 3) {
+                alert(`The answer was ${phoneticAlphabet[item]}`);
+                break;
+            }
+            else {
+                alert("Try again!");
+            }
+
+        }
     }
 }
 

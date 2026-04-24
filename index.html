@@ -121,7 +121,7 @@
 <div id="row3">
     <div class="displayboxwrapper">
         <div class="displayboxmain1">
-            <button onclick="ranphonetic()">Phonetic Alphabet Quiz</button>
+            <button onclick="askTimes()">Phonetic Alphabet Quiz</button>
         </div>
         <div class="displayboxbottom1">
             <p>title</p>
@@ -188,6 +188,18 @@
     Stock("FBGRX")
 
 
+</script>
+
+
+<script>
+    function askTimes() {
+        let times = parseInt(prompt("How many times?"), 10);
+        if (!isNaN(times) && times > 0) {
+            for (let i = 0; i < times; i++) {
+                ranphonetic();
+            }
+        }
+    }
 </script>
 
 </body>

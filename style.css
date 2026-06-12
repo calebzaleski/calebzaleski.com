@@ -435,6 +435,11 @@ h1 {
     width: 100%;
     max-width: 100%;
     align-items: flex-start;
+
+}
+.tasklist ul, li {
+    color: #000000;
+
 }
 
 /* Admin Todo form styles */
@@ -447,14 +452,14 @@ h1 {
     border-radius: 8px;
     font-family: var(--font-sans);
     font-size: 15px;
-    color: #1e293b !important;
+    color: #000000;
     background-color: #f8fafc;
     box-sizing: border-box;
     transition: all 0.2s ease;
 }
 
 .taskInput::placeholder {
-    color: #94a3b8;
+    color: #000000;
     opacity: 1;
 }
 

@@ -409,15 +409,16 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     margin: 15px auto;
-    padding: 24px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     font-family: var(--font-sans);
     font-weight: 600;
     font-size: 16px;
+    color: #cbd5e1;
     width: 75vw;
     max-width: 600px;
     min-height: 1px;
@@ -559,28 +560,30 @@ h1 {
 #website_list ul li {
     margin: 10px 0;
     padding: 12px 18px;
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: rgba(255, 255, 255, 0.05);
     border-left: 4px solid var(--primary-color);
-    border-radius: 8px;
+    border-radius: 0 8px 8px 0;
     font-family: var(--font-sans);
     font-weight: 700;
     font-size: clamp(14px, 2.2vw, 22px);
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--text-main);
+    color: #f1f5f9;
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    transition: all 0.2s ease;
+    transition: background var(--transition-speed);
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
 }
 
 #threedprinting_list ul li:hover, 
 #stir_it_up_list ul li:hover, 
 #website_list ul li:hover {
-    background-color: #f1f5f9;
-    border-color: #cbd5e1;
-    transform: translateX(3px);
+    background: rgba(255, 255, 255, 0.09);
+    border-color: var(--primary-color);
+    transform: none;
 }
 
 /* Recipe image wrappers */

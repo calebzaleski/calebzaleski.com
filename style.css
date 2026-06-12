@@ -438,6 +438,7 @@ h1 {
 }
 
 /* Admin Todo form styles */
+/* Note: color needs !important because body { color: #f8fafc } (white) is inherited by inputs */
 .taskInput {
     width: 100%;
     padding: 12px 16px;
@@ -446,10 +447,15 @@ h1 {
     border-radius: 8px;
     font-family: var(--font-sans);
     font-size: 15px;
-    color: var(--text-main);
+    color: #1e293b !important;
     background-color: #f8fafc;
     box-sizing: border-box;
     transition: all 0.2s ease;
+}
+
+.taskInput::placeholder {
+    color: #94a3b8;
+    opacity: 1;
 }
 
 .taskInput:focus {

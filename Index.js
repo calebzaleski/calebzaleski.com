@@ -95,7 +95,7 @@ function Version(elementId) {
         console.log(data);
         const version = data.version;
         console.log(version);
-        document.getElementById(elementId).textContent = `"${data}"`;
+        document.getElementById(elementId).textContent = `"${version}"`;
     }
     getapi(url);
 }

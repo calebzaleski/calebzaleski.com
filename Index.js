@@ -91,13 +91,13 @@ function Version(elementId) {
 
     async function getapi(url) {
         const response = await fetch(url);
-        var data = await response.json();
+        let data = await response.json();
         console.log(data);
         const version = data.version;
         console.log(version);
-        document.getElementById(elementId).textContent = `"${version}"`;
+        document.getElementById(elementId).textContent = `"${data}"`;
     }
-
+    getapi(url);
 }
 
 function ranphonetic() {
@@ -136,7 +136,6 @@ function ranphonetic() {
     console.log(letter[0]);
    let completed = false
    let iterations = 0;
-   let score = 0;
 
     while (!completed) {
         let userword = prompt(`Please enter the word for the letter corresponding to '${letter[0]}': `);

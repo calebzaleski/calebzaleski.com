@@ -86,6 +86,20 @@ function Stock(symbol) {
     getapi(url);
 }
 
+function Version(elementId) {
+    const url = "https://proxy.calebzaleski.com/version";
+
+    async function getapi(url) {
+        const response = await fetch(url);
+        var data = await response.json();
+        console.log(data);
+        const version = data.version;
+        console.log(version);
+        document.getElementById(elementId).textContent = `"${version}"`;
+    }
+
+}
+
 function ranphonetic() {
 
     const phoneticAlphabet = [

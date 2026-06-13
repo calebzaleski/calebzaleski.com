@@ -61,7 +61,7 @@ function NOTD(elementId) {
        const no = data.reason;
 
         document.getElementById(elementId).textContent =
-            `"${no}"`;
+            `"${data}"`;
     }
 
     getapi(url);

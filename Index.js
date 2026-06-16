@@ -58,10 +58,8 @@ function NOTD(elementId) {
         var data = await response.json();
         console.log(data);
 
-       const no = data.reason;
-
         document.getElementById(elementId).textContent =
-            `"${data}"`;
+            `"${data.reason}"`;
     }
 
     getapi(url);

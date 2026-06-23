@@ -3,39 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Stir It Up | Caleb Zaleski</title>
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=4">
     <link rel="icon" type="image/x-icon" href="images/cz.png">
-
     <style>
         .content {
             text-align: center;
         }
-
+        .paused-note {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px auto;
+            max-width: 600px;
+            font-size: 14.5px;
+            color: #f8fafc;
+            text-align: left;
+            line-height: 1.6;
+        }
+        .paused-note strong {
+            color: #fca5a5;
+        }
     </style>
 </head>
 <body>
 <div id="navbar"></div>
 
-
 <div class="todocontent">
-<h1>Stir It Up</h1>
-    <p>
-        Here you can find everything that I am working on for my recipe app called Stir It Up (coming soon to the app store).
-    </p>
-    <p>5/12/26 Update: this project has been paused due to my inability to work with xcode as my Mac has to little ram and storage left. Hopefully I will be able to start back soon but in order to do so I will get a new computer</p>
-
-
-<div class="todowrapper">
-    <div class="tasklist">
-        <div class="tasklist" id="stir_it_up_list"></div>
+    <div class="project-hero">
+        <div class="project-icon">🍳</div>
+        <h1>Stir It Up</h1>
+        <p>
+            Here you can find everything that I am working on for my recipe app called <strong>Stir It Up</strong> (coming soon to the app store).
+        </p>
+        <div class="paused-note">
+            <strong>Update (5/12/26):</strong> This project has been paused due to my inability to work with Xcode as my Mac has too little RAM and storage left. Hopefully, I will be able to start back soon but in order to do so, I will get a new computer.
+        </div>
     </div>
-</div>
+
+    <div class="todowrapper">
+        <div class="tasklist">
+            <div class="tasklist" id="stir_it_up_list"></div>
+        </div>
+    </div>
 
     <div class="image-wrap">
-        <img src="images/main.png" alt="recipe" class="recipe-img">
-        <img src="images/recipe.png" alt="recipe" class="recipe-img">
+        <img src="images/main.png" alt="Stir It Up Main Screen" class="recipe-img">
+        <img src="images/recipe.png" alt="Stir It Up Recipe Screen" class="recipe-img">
     </div>
 </div>
+
 <script src="Index.js"></script>
 <script src="tasklist.js"></script>
 <script>

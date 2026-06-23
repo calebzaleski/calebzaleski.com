@@ -688,6 +688,14 @@ h1 {
 
 /* ==========================================================================
    Technical timeline section (in website.html)
+
+   How it works:
+   - .timeline is the outer card container
+   - .timeline-track is a wrapper div that holds the vertical line as a
+     ::before pseudo-element, running the full height of the steps
+   - Each .timeline-step is positioned with left padding to clear the line
+   - Each step's ::before draws a circle, absolutely positioned to sit
+     centered on the vertical line
    ========================================================================== */
 
 .timeline {
@@ -714,36 +722,54 @@ h1 {
     line-height: 1.4;
 }
 
+/* The track wraps all the steps and draws one continuous vertical line */
+.timeline-track {
+    position: relative;
+    padding-left: 32px; /* space for the line + circle + gap */
+}
+
+/* Continuous vertical line */
+.timeline-track::before {
+    content: '';
+    position: absolute;
+    left: 6px;            /* center of the 14px circle (7px) minus half of 2px line */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(59, 130, 246, 0.3);
+}
+
+/* Each step */
 .timeline-step {
     position: relative;
-    padding-left: 28px;
-    border-left: 2px solid rgba(59, 130, 246, 0.3);
-    margin-bottom: 24px;
-    transition: all 0.3s ease;
+    padding-bottom: 28px;
     box-sizing: border-box;
 }
 
-.timeline-step:hover {
-    border-left-color: var(--primary-color);
+.timeline-step:last-child {
+    padding-bottom: 0;
 }
 
+/* Circle dot on the line */
 .timeline-step::before {
     content: '';
     position: absolute;
-    left: -7px;
-    top: 6px;
-    width: 12px;
-    height: 12px;
+    left: -32px;          /* pull back into the padding-left of .timeline-track */
+    top: 4px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background-color: #1e293b;
     border: 2px solid rgba(59, 130, 246, 0.5);
+    z-index: 1;
     transition: all 0.3s ease;
 }
 
+/* Hover: circle fills blue and glows */
 .timeline-step:hover::before {
     background-color: var(--primary-color);
     border-color: #60a5fa;
-    box-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
 }
 
 .timeline-step h3 {
@@ -782,6 +808,80 @@ h1 {
 .bookmark {
     width: 50%;
     height: 50%;
+}
+
+/* ==========================================================================
+   Premium Project Page Enhancements
+   ========================================================================== */
+
+.project-hero {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 0.6s ease-out;
+}
+
+.project-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: inline-block;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    margin-bottom: 30px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.tasklist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.tasklist-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #f1f5f9;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.badge {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 10px rgba(59, 130, 246, 0.4);
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ==========================================================================

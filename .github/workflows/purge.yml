@@ -1,0 +1,10 @@
+on:
+  push:
+      branches:
+        - main
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send purge request to cf
+        run: curl -X POST "https://api.cloudflare.com/client/v4/zones/CF_ZONE_ID/purge_cache" -H "Authorization: Bearer CF_API_TOKEN" -H "Content-Type: application/json" --data '{"purge_everything":true}'

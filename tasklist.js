@@ -69,6 +69,7 @@ async function addTask(table, wrapper) {
         return;
     }
 
+
     try {
         const response = await fetch(url, {
             method: 'POST',

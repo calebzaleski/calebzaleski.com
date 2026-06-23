@@ -234,8 +234,14 @@ async function genericFetchHandler(table) {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.checked = !!task.completed;
+        
+        if (checkbox.checked) {
+            label.classList.add('completed');
+        }
+
         checkbox.addEventListener('change', () => {
             updateTask(table, task.id, checkbox.checked);
+            label.classList.toggle('completed', checkbox.checked);
         });
 
         const textNode = document.createTextNode(task.task);
@@ -316,6 +322,10 @@ async function readOnlyFetchHandler(table) {
     tasks.forEach(task => {
         const li = document.createElement('li');
         li.dataset.id = task.id;
+
+        if (task.completed) {
+            li.classList.add('completed');
+        }
 
         const textNode = document.createTextNode(task.task);
         li.appendChild(textNode);

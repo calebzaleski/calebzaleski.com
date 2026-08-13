@@ -3,6 +3,8 @@
    Base setup for layout, variables, glassmorphism, and responsive widgets.
    ========================================================================== */
 
+@import url("navbar.css");
+
 :root {
     /* Color Palette */
     --primary-color: #3b82f6;
@@ -15,8 +17,6 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     
     /* Layout & Shadows */
-    --navbar-bg: rgba(243, 244, 246, 0.88);
-    --navbar-border: rgba(255, 255, 255, 0.4);
     --card-bg: rgba(255, 255, 255, 0.92);
     --card-bg-hover: rgba(255, 255, 255, 0.97);
     --card-border: rgba(255, 255, 255, 0.6);
@@ -72,137 +72,6 @@ footer a {
 
 footer a:hover {
     transform: translateY(-2px);
-}
-
-/* Navbar styles - AT THE TOP */
-.navbar {
-    background-color: var(--navbar-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--navbar-border);
-    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.12);
-    padding: 8px 20px;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 3;
-    box-sizing: border-box;
-    transition: background-color var(--transition-speed) var(--transition-timing);
-}
-
-.logo {
-    width: 40px;
-    height: 40px;
-    padding-right: 10px;
-    transition: transform var(--transition-speed) var(--transition-timing);
-}
-
-.logo:hover {
-    transform: scale(1.06) rotate(3deg);
-}
-
-/* Clean, non-leaking navbar links and site title */
-.navbar a, 
-.navbar .dropdown-btn {
-    color: var(--text-main);
-    text-decoration: none;
-    padding: 8px 16px;
-    font-size: clamp(14px, 1.8vw, 18px);
-    font-family: var(--font-sans), serif;
-    font-weight: 600;
-    border-radius: 6px;
-    transition: all var(--transition-speed) var(--transition-timing);
-}
-
-.navbar a:hover, 
-.navbar .dropdown-btn:hover {
-    background-color: rgba(0, 0, 0, 0.06);
-    color: #000;
-    transform: translateY(-1px);
-}
-
-.navbarleft {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    flex-grow: 1;
-    letter-spacing: 5px;
-}
-
-.navbarleft h3 {
-    margin: 0;
-    font-family: var(--font-sans);
-    font-weight: 800;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    font-size: clamp(12px, 1.6vw, 17px);
-    background: linear-gradient(135deg, #0f172a 0%, #475569 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Dropdown styling */
-.dropdown {
-    position: relative;
-    display: inline-block;
-    font-family: var(--font-sans);
-}
-
-.dropdown-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.96);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    min-width: 170px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 8px;
-    z-index: 1;
-    overflow: hidden;
-    margin-top: 4px;
-    animation: dropdownFadeIn 0.2s var(--transition-timing);
-}
-
-@keyframes dropdownFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.dropdown-content a {
-    display: block;
-    padding: 10px 16px;
-    font-size: clamp(14px, 1.6vw, 17px);
-    font-weight: 600;
-    color: var(--text-muted);
-    transition: all 0.2s var(--transition-timing);
-    border-radius: 0;
-}
-
-.dropdown-content a:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-    color: #000;
-    padding-left: 20px; /* Subtle slide interaction on hover */
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
 }
 
 /* Content wrapper (pushed down to clear fixed navbar) */
@@ -391,6 +260,11 @@ h1 {
     line-height: 1.6;
     margin-top: 0;
     margin-bottom: 24px;
+}
+.todocontent a {
+    color: #000000;
+    text-decoration: none;
+
 }
 
 .todowrapper {
@@ -903,23 +777,6 @@ h1 {
    ========================================================================== */
 
 @media (max-width: 768px) {
-    .navbar {
-        padding: 8px 12px;
-    }
-    
-    .navbar a, 
-    .navbar .dropdown-btn {
-        padding: 6px 10px;
-    }
-    
-    .navbarleft {
-        letter-spacing: 2px;
-    }
-    
-    .navbarleft h3 {
-        letter-spacing: 2px;
-    }
-    
     .aboutpage {
         flex-direction: column;
         align-items: center;
@@ -950,4 +807,20 @@ h1 {
         width: 90vw;
         padding: 18px;
     }
+}
+
+.printer-img {
+    width: 50vw;
+    max-width: 400px;
+    height: auto;
+    max-height: 800px;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+    padding: 0;
+}
+
+.printer-img:hover {
+    transform: scale(1.01);
 }

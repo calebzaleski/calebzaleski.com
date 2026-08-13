@@ -92,7 +92,6 @@ async function addTask(table, wrapper) {
 
     } catch (err) {
         console.error('Error adding task:', err);
-        alert('Failed to add task');
     }
 }
 
@@ -136,7 +135,6 @@ function updateTask(table, id, completed) {
         } catch (err) {
             // Log error and alert user of failure
             console.error('Error updating task:', err);
-            alert('Failed to update task');
         }
     }
 
@@ -193,7 +191,6 @@ function fetch_all(table) {
         } catch (err) {
             // Log error and alert user of failure
             console.error('Error fetching tasks:', err);
-            alert('Failed to fetch tasks');
 
             // Return empty array on error to prevent further issues
             return [];

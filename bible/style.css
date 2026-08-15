@@ -11,3 +11,16 @@
     align-items: center;
     padding-top: 60px;
 }
+
+.searchresult {
+    display: flex;
+    width: 95%;
+    height: 300px;
+    overflow-y: auto;
+}
+.searchmain {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}

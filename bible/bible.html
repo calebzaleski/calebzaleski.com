@@ -18,13 +18,31 @@
     <div id="navbar"></div>
 
     <div class="biblefull">
-        <div class="biblesearch">
-        <input id="bibleQuery" type="text" placeholder="example: Joseph">
-        <button id="bibleSearchBtn">Search</button>
+        <h4>query a word or sentence from the Hebrew definition.</h4>
+
+        <div class="searchmain">
+            <label for="bibleDefQuery"></label><input id="bibleDefQuery" type="text" placeholder="example: Joseph">
+        <button id="bibleDefSearchBtn">Search</button>
+        </div>
+        <!-- we could use a search contains (word or string is in the verse), this could be apart of this search
+        it could be /search_$(type) and type could be set here
+        -->
+
+        <!--have one single prompt for search verse, verses and chapter. -->
+        <h4>search for a word, phrase or sentence from the KJV bible.</h4>
+
+        <div class="searchmain">
+            <label for="bibleContextQuery"></label><input id="bibleContextQuery" type="text" placeholder="example: Joseph">
+            <button id="bibleContextSearchBtn">Search</button>
+        </div>
+        <div class="searchresult">
         <div id="searchResults"></div>
         </div>
+
     </div>
+
 </div>
+
 </body>
 
 <script src="/Index.js"></script>

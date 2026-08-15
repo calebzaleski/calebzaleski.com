@@ -15,7 +15,7 @@ async function searchDef(query) {
 }
 
 async function searchContext(query) {
-const url = `${URL}/bible/search_context?string=${encodeURIComponent(query)}`;
+const url = `${URL}/bible/search_content?string=${encodeURIComponent(query)}`;
 
     try {
         const response = await fetch(url, { method: 'POST' });
@@ -33,8 +33,8 @@ document.getElementById('bibleDefSearchBtn').addEventListener('click', async () 
     document.getElementById("searchResults").textContent = JSON.stringify(data);
 });
 
-document.getElementById('bibleContextSearchBtn').addEventListener('click', async () => {
-    const query = document.getElementById('bibleContextQuery').value;
+document.getElementById('bibleContentSearchBtn').addEventListener('click', async () => {
+    const query = document.getElementById('bibleContentQuery').value;
     const data = await searchContext(query);
     document.getElementById("searchResults").textContent = JSON.stringify(data);
 });

@@ -51,17 +51,46 @@ async function fetchQuiz() {
 }
 
 let quizAnswer = {};
+let quizMisses = 0;
 
 async function loadQuiz() {
     quizAnswer = await fetchQuiz();
+    quizMisses = 0;
     document.getElementById('quizBook').textContent = `Book: ${quizAnswer.book}`;
 }
 
-loadQuiz();
 
-document.getElementById('quizSubmitBtn').addEventListener('click', () => {
+function submitQuiz() {
     const testament = document.getElementById('quizTestament').value.trim().toUpperCase();
     const author = document.getElementById('quizAuthor').value.trim().toLowerCase();
     const correct = testament === quizAnswer.testament && author === quizAnswer.author.toLowerCase();
-    document.getElementById('quizResult').textContent = correct ? 'Correct!' : 'Try again.';
+
+    if (correct === true) {
+        document.getElementById('quizResult').textContent = 'Correct!';
+        setTimeout(loadQuiz, 1000);
+        return;
+    }
+
+    quizMisses++;
+    if (quizMisses >= 2) {
+        document.getElementById('quizResult').textContent = `Answer: ${quizAnswer.testament} / ${quizAnswer.author}`;
+    } else {
+        document.getElementById('quizResult').textContent = 'Try again.';
+    }
+}
+
+document.getElementById('quizSubmitBtn').addEventListener('click', submitQuiz);
+
+
+
+document.getElementById('quizTestament').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') submitQuiz();
 });
+
+document.getElementById('quizAuthor').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') submitQuiz();
+});
+
+
+
+loadQuiz();

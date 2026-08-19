@@ -14,8 +14,8 @@ async function searchDef(query) {
     }
 }
 
-async function searchContext(query) {
-const url = `${URL}/bible/search_content?string=${encodeURIComponent(query)}`;
+async function searchContext(query, type) {
+    const url = `${URL}/bible/search_content_${type}?string=${encodeURIComponent(query)}`;
 
     try {
         const response = await fetch(url, { method: 'POST' });
@@ -35,7 +35,8 @@ document.getElementById('bibleDefSearchBtn').addEventListener('click', async () 
 
 document.getElementById('bibleContentSearchBtn').addEventListener('click', async () => {
     const query = document.getElementById('bibleContentQuery').value;
-    const data = await searchContext(query);
+    const type = document.getElementById('bibleContentSearchType').checked ? 'strict' : 'loose';
+    const data = await searchContext(query, type);
     document.getElementById("searchResults").textContent = JSON.stringify(data);
 });
 
@@ -70,6 +71,8 @@ function submitQuiz() {
         document.getElementById('quizAuthor').value = ''
         document.getElementById('quizTestament').value = ''
         setTimeout(loadQuiz, 1000);
+        document.getElementById('quizResult').value = ''
+
         return;
     }
 
@@ -79,6 +82,8 @@ function submitQuiz() {
         document.getElementById('quizAuthor').value = ''
         document.getElementById('quizTestament').value = ''
         setTimeout(loadQuiz, 1000);
+        document.getElementById('quizResult').value = ''
+
 
     } else {
         document.getElementById('quizResult').textContent = 'Try again.';
@@ -87,16 +92,8 @@ function submitQuiz() {
 
 document.getElementById('quizSubmitBtn').addEventListener('click', submitQuiz);
 
+document.getElementById('quizTestament').addEventListener('keydown', (e) => { if (e.key === 'Enter') submitQuiz();});
 
-
-document.getElementById('quizTestament').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') submitQuiz();
-});
-
-document.getElementById('quizAuthor').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') submitQuiz();
-});
-
-
+document.getElementById('quizAuthor').addEventListener('keydown', (e) => {if (e.key === 'Enter') submitQuiz();});
 
 loadQuiz();

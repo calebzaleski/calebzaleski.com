@@ -38,3 +38,30 @@ document.getElementById('bibleContentSearchBtn').addEventListener('click', async
     const data = await searchContext(query);
     document.getElementById("searchResults").textContent = JSON.stringify(data);
 });
+
+async function fetchQuiz() {
+    const url = `${URL}/bible/quiz`;
+
+    try {
+        const response = await fetch(url, { method: 'POST' });
+        return await response.json();
+    } catch (err) {
+        console.error('Error fetching quiz:', err);
+    }
+}
+
+let quizAnswer = {};
+
+async function loadQuiz() {
+    quizAnswer = await fetchQuiz();
+    document.getElementById('quizBook').textContent = `Book: ${quizAnswer.book}`;
+}
+
+loadQuiz();
+
+document.getElementById('quizSubmitBtn').addEventListener('click', () => {
+    const testament = document.getElementById('quizTestament').value.trim().toUpperCase();
+    const author = document.getElementById('quizAuthor').value.trim().toLowerCase();
+    const correct = testament === quizAnswer.testament && author === quizAnswer.author.toLowerCase();
+    document.getElementById('quizResult').textContent = correct ? 'Correct!' : 'Try again.';
+});

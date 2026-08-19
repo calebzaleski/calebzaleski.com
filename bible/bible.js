@@ -62,11 +62,13 @@ async function loadQuiz() {
 
 function submitQuiz() {
     const testament = document.getElementById('quizTestament').value.trim().toUpperCase();
-    const author = document.getElementById('quizAuthor').value.trim().toLowerCase();
+    let author = document.getElementById('quizAuthor').value.trim().toLowerCase();
     const correct = testament === quizAnswer.testament && author === quizAnswer.author.toLowerCase();
 
     if (correct === true) {
         document.getElementById('quizResult').textContent = 'Correct!';
+        document.getElementById('quizAuthor').value = ''
+        document.getElementById('quizTestament').value = ''
         setTimeout(loadQuiz, 1000);
         return;
     }
@@ -74,6 +76,8 @@ function submitQuiz() {
     quizMisses++;
     if (quizMisses >= 2) {
         document.getElementById('quizResult').textContent = `Answer: ${quizAnswer.testament} / ${quizAnswer.author}`;
+        document.getElementById('quizAuthor').value = ''
+        document.getElementById('quizTestament').value = ''
         setTimeout(loadQuiz, 1000);
 
     } else {

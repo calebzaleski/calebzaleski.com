@@ -74,6 +74,8 @@ function submitQuiz() {
     quizMisses++;
     if (quizMisses >= 2) {
         document.getElementById('quizResult').textContent = `Answer: ${quizAnswer.testament} / ${quizAnswer.author}`;
+        setTimeout(loadQuiz, 1000);
+
     } else {
         document.getElementById('quizResult').textContent = 'Try again.';
     }

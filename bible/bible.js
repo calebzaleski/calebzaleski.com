@@ -27,17 +27,149 @@ async function searchContext(query, type) {
     }
 }
 
+async function fetchVerse(book, chapter, verse) {
+    const url = `${URL}/bible/verse?book=${encodeURIComponent(book)}&chapter=${encodeURIComponent(chapter)}&verse=${encodeURIComponent(verse)}`;
+
+    try {
+        const response = await fetch(url, { method: 'POST' });
+        return await response.json();
+    } catch (err) {
+        console.error('Error fetching verse:', err);
+    }
+}
+
+// Dedupe result rows down to one entry per book/chapter/verse, since
+// search_def can return multiple word-level matches for the same verse.
+function dedupeByReference(results) {
+    const seen = new Set();
+    const deduped = [];
+    for (const r of results) {
+        const key = `${r.book}|${r.chapter}|${r.verse}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        deduped.push(r);
+    }
+    return deduped;
+}
+
+function clearResults() {
+    document.getElementById('searchResults').innerHTML = '';
+    document.getElementById('verseDetail').innerHTML = '';
+    document.getElementById('verseDetail').classList.remove('open');
+}
+
+function renderResultsList(results) {
+    const container = document.getElementById('searchResults');
+    container.innerHTML = '';
+
+    if (!results || results.length === 0) {
+        container.innerHTML = '<p class="noResults">No results found.</p>';
+        return;
+    }
+
+    const list = document.createElement('ul');
+    list.className = 'verseList';
+
+    dedupeByReference(results).forEach((r) => {
+        const item = document.createElement('li');
+        item.className = 'verseListItem';
+
+        const ref = document.createElement('span');
+        ref.className = 'verseRef';
+        ref.textContent = `${r.book} ${r.chapter}:${r.verse}`;
+
+        const text = document.createElement('span');
+        text.className = 'verseText';
+        text.textContent = r.kjv || '';
+
+        item.appendChild(ref);
+        item.appendChild(text);
+        item.addEventListener('click', () => openVerseDetail(r.book, r.chapter, r.verse, item));
+
+        list.appendChild(item);
+    });
+
+    container.appendChild(list);
+}
+
+function fieldRow(label, value) {
+    if (value === null || value === undefined || value === '') return '';
+    return `<div class="wordField"><span class="wordFieldLabel">${label}</span><span class="wordFieldValue">${value}</span></div>`;
+}
+
+async function openVerseDetail(book, chapter, verse, itemEl) {
+    document.querySelectorAll('.verseListItem.active').forEach((el) => el.classList.remove('active'));
+    if (itemEl) itemEl.classList.add('active');
+
+    const detail = document.getElementById('verseDetail');
+    detail.classList.add('open');
+    detail.innerHTML = '<p class="loading">Loading verse...</p>';
+
+    const data = await fetchVerse(book, chapter, verse);
+    if (!data || (!data.kjv && !data.hebrew)) {
+        detail.innerHTML = '<p class="noResults">Could not load verse details.</p>';
+        return;
+    }
+
+    const kjvText = data.kjv ? data.kjv.text : '';
+    const originalText = data.hebrew ? data.hebrew.text : '';
+    const wordInfo = data.wordinfo || [];
+
+    let html = `
+        <button id="closeVerseDetail" class="closeBtn" aria-label="Close">&times;</button>
+        <h3 class="verseDetailRef">${book} ${chapter}:${verse}</h3>
+        <p class="verseDetailKjv">${kjvText}</p>
+    `;
+
+    if (originalText) {
+        html += `<p class="verseDetailOriginal">${originalText}</p>`;
+    }
+
+    if (wordInfo.length > 0) {
+        html += '<div class="wordInfoList">';
+        wordInfo.forEach((w) => {
+            html += `
+                <div class="wordInfoCard">
+                    <div class="wordInfoHeader">
+                        <span class="wordOriginal">${w.hebrew || ''}</span>
+                        ${w.transliteration ? `<span class="wordTranslit">(${w.transliteration})</span>` : ''}
+                    </div>
+                    ${fieldRow('Short gloss', w.short_gloss)}
+                    ${fieldRow('Gloss', w.gloss)}
+                    ${fieldRow('Definition', w.definition)}
+                    ${fieldRow('Headword', w.headword)}
+                    ${fieldRow('Part of speech', w.pos)}
+                    ${fieldRow('Parsing', w.parsing)}
+                    ${fieldRow('Morphology', w.morph)}
+                    ${fieldRow('Strong\'s', w.strongs)}
+                    ${fieldRow('Segmented', w.segmented)}
+                </div>
+            `;
+        });
+        html += '</div>';
+    }
+
+    detail.innerHTML = html;
+    document.getElementById('closeVerseDetail').addEventListener('click', () => {
+        detail.classList.remove('open');
+        detail.innerHTML = '';
+        document.querySelectorAll('.verseListItem.active').forEach((el) => el.classList.remove('active'));
+    });
+}
+
 document.getElementById('bibleDefSearchBtn').addEventListener('click', async () => {
     const query = document.getElementById('bibleDefQuery').value;
+    clearResults();
     const data = await searchDef(query);
-    document.getElementById("searchResults").textContent = JSON.stringify(data);
+    renderResultsList(data ? data.results : []);
 });
 
 document.getElementById('bibleContentSearchBtn').addEventListener('click', async () => {
     const query = document.getElementById('bibleContentQuery').value;
     const type = document.getElementById('bibleContentSearchType').checked ? 'strict' : 'loose';
+    clearResults();
     const data = await searchContext(query, type);
-    document.getElementById("searchResults").textContent = JSON.stringify(data);
+    renderResultsList(data ? data.results : []);
 });
 
 async function fetchQuiz() {

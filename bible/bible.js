@@ -58,6 +58,18 @@ function clearResults() {
     document.getElementById('verseDetail').classList.remove('open');
 }
 
+// Runs `worker` over `items` with at most `limit` calls in flight at once.
+async function runWithConcurrency(items, limit, worker) {
+    let next = 0;
+    async function runNext() {
+        const i = next++;
+        if (i >= items.length) return;
+        await worker(items[i], i);
+        await runNext();
+    }
+    await Promise.all(Array.from({ length: Math.min(limit, items.length) }, runNext));
+}
+
 function renderResultsList(results) {
     const container = document.getElementById('searchResults');
     container.innerHTML = '';
@@ -70,7 +82,10 @@ function renderResultsList(results) {
     const list = document.createElement('ul');
     list.className = 'verseList';
 
-    dedupeByReference(results).forEach((r) => {
+    const deduped = dedupeByReference(results);
+    const pendingText = [];
+
+    deduped.forEach((r) => {
         const item = document.createElement('li');
         item.className = 'verseListItem';
 
@@ -80,7 +95,16 @@ function renderResultsList(results) {
 
         const text = document.createElement('span');
         text.className = 'verseText';
-        text.textContent = r.kjv || '';
+
+        if (r.kjv) {
+            text.textContent = r.kjv;
+        } else {
+            // search_def results don't include KJV text, so backfill it from /verse
+            // to match the layout of the content search results.
+            text.textContent = '';
+            text.classList.add('loading');
+            pendingText.push({ r, span: text });
+        }
 
         item.appendChild(ref);
         item.appendChild(text);
@@ -90,6 +114,12 @@ function renderResultsList(results) {
     });
 
     container.appendChild(list);
+
+    runWithConcurrency(pendingText, 5, async ({ r, span }) => {
+        const data = await fetchVerse(r.book, r.chapter, r.verse);
+        span.classList.remove('loading');
+        span.textContent = data && data.kjv ? data.kjv.text : '';
+    });
 }
 
 function fieldRow(label, value) {

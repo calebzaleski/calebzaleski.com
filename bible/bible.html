@@ -53,10 +53,12 @@
             <h4 class="sectionLabel">Book quiz</h4>
             <p id="quizBook" class="quizBookLabel"></p>
             <div class="quizInputs">
-                <label for="quizTestament" class="visuallyHidden">Testament</label>
-                <input id="quizTestament" class="bibleInput" type="text" placeholder="Testament: OT or NT">
                 <label for="quizAuthor" class="visuallyHidden">Author</label>
-                <input id="quizAuthor" class="bibleInput" type="text" placeholder="Author name">
+                <input id="quizAuthor" class="bibleInput" type="text" placeholder="Author">
+                <label for="quizAuthorbtn" class="strictToggle">
+                    <input id="quizAuthorbtn" type="checkbox">
+                    <span>Check for NT</span>
+                </label>
                 <button id="quizSubmitBtn" class="bibleBtn">Submit</button>
             </div>
             <p id="quizResult" class="quizResult"></p>

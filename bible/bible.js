@@ -157,20 +157,28 @@ async function openVerseDetail(book, chapter, verse, itemEl) {
     });
 }
 
-document.getElementById('bibleDefSearchBtn').addEventListener('click', async () => {
-    const query = document.getElementById('bibleDefQuery').value;
+async function runDefSearch() {
+    const query = document.getElementById('bibleDefQuery').value.trim();
+    if (!query) return;
     clearResults();
     const data = await searchDef(query);
     renderResultsList(data ? data.results : []);
-});
+}
 
-document.getElementById('bibleContentSearchBtn').addEventListener('click', async () => {
-    const query = document.getElementById('bibleContentQuery').value;
+async function runContentSearch() {
+    const query = document.getElementById('bibleContentQuery').value.trim();
+    if (!query) return;
     const type = document.getElementById('bibleContentSearchType').checked ? 'strict' : 'loose';
     clearResults();
     const data = await searchContext(query, type);
     renderResultsList(data ? data.results : []);
-});
+}
+
+document.getElementById('bibleDefSearchBtn').addEventListener('click', runDefSearch);
+document.getElementById('bibleDefQuery').addEventListener('keydown', (e) => { if (e.key === 'Enter') runDefSearch(); });
+
+document.getElementById('bibleContentSearchBtn').addEventListener('click', runContentSearch);
+document.getElementById('bibleContentQuery').addEventListener('keydown', (e) => { if (e.key === 'Enter') runContentSearch(); });
 
 async function fetchQuiz() {
     const url = `${URL}/bible/quiz`;

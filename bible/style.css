@@ -42,7 +42,7 @@ body {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
-    max-width: 900px;
+    max-width: 1300px;
 }
 
 /* Hero */
@@ -121,7 +121,6 @@ body {
 }
 
 .bibleInput {
-    flex: 1 1 220px;
     padding: 11px 14px;
     border: 1.5px solid #cbd5e1;
     border-radius: 8px;
@@ -131,6 +130,9 @@ body {
     background-color: #f8fafc;
     box-sizing: border-box;
     transition: all 0.2s ease;
+    flex: 0 0 300px;
+    width: 300px;
+    max-width: 100%;
 }
 
 .bibleInput::placeholder {
@@ -162,6 +164,7 @@ body {
 }
 
 .bibleBtn {
+    margin-left: auto;
     padding: 11px 20px;
     background: var(--primary-gradient);
     color: #ffffff;
@@ -176,6 +179,7 @@ body {
     box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
     transition: all 0.2s ease;
     flex: 0 0 auto;
+
 }
 
 .bibleBtn:hover {
@@ -196,7 +200,8 @@ body {
     align-items: stretch;
     gap: 16px;
     width: 100%;
-    height: 440px;
+    height: auto;
+    max-height: 700px;
     margin-bottom: 20px;
 }
 

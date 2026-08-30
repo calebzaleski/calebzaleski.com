@@ -134,6 +134,7 @@ async function openVerseDetail(book, chapter, verse, itemEl) {
     const detail = document.getElementById('verseDetail');
     detail.classList.add('open');
     detail.innerHTML = '<p class="loading">Loading verse...</p>';
+    detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     const data = await fetchVerse(book, chapter, verse);
     if (!data || (!data.kjv && !data.hebrew)) {

@@ -201,7 +201,7 @@ body {
     gap: 16px;
     width: 100%;
     height: auto;
-    max-height: 900px;
+    max-height: 1000px;
     margin-bottom: 20px;
 }
 
@@ -210,8 +210,8 @@ body {
     flex: 1 1 40%;
     min-width: 0;
     width: 100%;
-    height: auto;
-    max-height: 600px;
+    min-height: 500px;
+    max-height: 800px;
     overflow-y: auto;
     background: var(--panel-bg);
     border: 1px solid var(--panel-border);
@@ -288,8 +288,8 @@ body {
     flex: 1 1 60%;
     min-width: 0;
     width: 100%;
-    height: auto;
-    max-height: 600px;
+    min-height: 500px;
+    max-height: 800px;
     overflow-y: auto;
     background: var(--panel-bg);
     border: 1px solid var(--panel-border);
@@ -442,7 +442,7 @@ body {
 @media (max-width: 720px) {
     #searchResults,
     #verseDetail {
-        max-height: 800px;
+        max-height: 1000px;
     }
 
     .glass-panel {

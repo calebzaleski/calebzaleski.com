@@ -287,7 +287,7 @@ body {
     min-width: 0;
     width: 100%;
     height: auto;
-    min-height: 450px;
+    min-height: 50px;
     max-height: 600px;
     overflow-y: auto;
     background: var(--panel-bg);
@@ -295,12 +295,13 @@ body {
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     position: relative;
-    display: none;
+    display: block;
     box-sizing: border-box;
+    transition: min-height 0.25s ease;
 }
 
 #verseDetail.open {
-    display: block;
+    min-height: 450px;
     padding: 20px 24px;
 }
 

@@ -201,6 +201,7 @@ body {
     gap: 16px;
     width: 100%;
     height: auto;
+    min-height: 500px;
     max-height: 900px;
     margin-bottom: 20px;
 }
@@ -211,7 +212,8 @@ body {
     min-width: 0;
     width: 100%;
     height: auto;
-    max-height: 500px;
+    min-height: 400px;
+    max-height: 600px;
     overflow-y: auto;
     background: var(--panel-bg);
     border: 1px solid var(--panel-border);
@@ -285,7 +287,8 @@ body {
     min-width: 0;
     width: 100%;
     height: auto;
-    max-height: 400px;
+    min-height: 450px;
+    max-height: 600px;
     overflow-y: auto;
     background: var(--panel-bg);
     border: 1px solid var(--panel-border);
@@ -438,7 +441,7 @@ body {
 @media (max-width: 720px) {
     #searchResults,
     #verseDetail {
-        max-height: 600px;
+        max-height: 800px;
     }
 
     .glass-panel {

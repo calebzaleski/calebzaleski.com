@@ -233,14 +233,20 @@ async function loadQuiz() {
     document.getElementById('quizAuthorbtn').checked = false;
 }
 
+async function resetQuiz() {
+    document.getElementById('quizAuthor').value = '';
+    document.getElementById('quizAuthorbtn').checked = false;
+}
+
 
 function submitQuiz() {
     const testamentGuess = document.getElementById('quizAuthorbtn').checked ? 'NT' : 'OT';
-    const author = document.getElementById('quizAuthor').value.trim().toLowerCase();
-    const correct = testamentGuess === quizAnswer.testament && author === quizAnswer.author.toLowerCase();
+    const author = document.getElementById('quizAuthor').value.trim().toLowerCase().split("/").map(s => s.trim());
+    const correct = testamentGuess === quizAnswer.testament && author.some(a => a.trim() === quizAnswer.author.toLowerCase());
 
     if (correct === true) {
         document.getElementById('quizResult').textContent = 'Correct!';
+        resetQuiz();
         setTimeout(loadQuiz, 1000);
         return;
     }
@@ -248,7 +254,8 @@ function submitQuiz() {
     quizMisses++;
     if (quizMisses >= 2) {
         document.getElementById('quizResult').textContent = `Answer: ${quizAnswer.testament} / ${quizAnswer.author}`;
-        setTimeout(loadQuiz, 1000);
+        resetQuiz();
+        setTimeout(loadQuiz, 100);
     } else {
         document.getElementById('quizResult').textContent = 'Try again.';
     }

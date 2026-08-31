@@ -211,7 +211,7 @@ body {
     min-width: 0;
     width: 100%;
     min-height: 500px;
-    max-height: 800px;
+    max-height: 650px;
     overflow-y: auto;
     background: var(--panel-bg);
     border: 1px solid var(--panel-border);
@@ -442,7 +442,7 @@ body {
 @media (max-width: 720px) {
     #searchResults,
     #verseDetail {
-        max-height: 1000px;
+        max-height: 800px;
     }
 
     .glass-panel {

@@ -38,6 +38,29 @@ async function fetchVerse(book, chapter, verse) {
     }
 }
 
+async function fetchVerses(book, chapter, verse_s, verse_e) {
+    const  url = `${URL}/bible/verses?book=${encodeURIComponent(book)}&chapter=${encodeURIComponent(chapter)}&verse_s=${encodeURIComponent(verse_s)}&verse_e=${encodeURIComponent(verse_e)}`;
+    try {
+        const response = await fetch(url, { method: 'POST' });
+        return await response.json();
+    }
+    catch (err) {
+        console.error('Error fetching verse:', err);
+    }
+}
+
+async function fetchChapter(book, chapter) {
+    const url = `${URL}/bible/chapter?book=${encodeURIComponent(book)}&chapter=${encodeURIComponent(chapter)}`;
+
+    try {
+        const response = await fetch(url, { method: 'POST' });
+        return await response.json();
+    }
+    catch (err) {
+        console.error('Error fetching chapter:', err);
+    }
+}
+
 // Dedupe result rows down to one entry per book/chapter/verse, since
 // search_def can return multiple word-level matches for the same verse.
 function dedupeByReference(results) {
@@ -188,28 +211,108 @@ async function openVerseDetail(book, chapter, verse, itemEl) {
     });
 }
 
-async function runDefSearch() {
-    const query = document.getElementById('bibleDefQuery').value.trim();
+const searchModeSelect = document.getElementById('bibleSearchMode');
+const searchQueryInput = document.getElementById('bibleSearchQuery');
+const strictToggleWrap = document.getElementById('strictToggleWrap');
+const searchHint = document.getElementById('searchHint');
+
+function updateSearchModeUI() {
+    const isDef = searchModeSelect.value === 'def';
+    strictToggleWrap.hidden = isDef;
+    searchQueryInput.placeholder = isDef ? 'example: Spirit' : 'example: and He wept';
+    searchHint.textContent = isDef
+        ? 'Query a word or sentence from the original-language definition.'
+        : 'Search for a word, phrase or sentence from the KJV Bible.';
+}
+
+searchModeSelect.addEventListener('change', updateSearchModeUI);
+updateSearchModeUI();
+
+async function runSearch() {
+    const query = searchQueryInput.value.trim();
     if (!query) return;
     clearResults();
-    const data = await searchDef(query);
+
+    let data;
+    if (searchModeSelect.value === 'def') {
+        data = await searchDef(query);
+    } else {
+        const type = document.getElementById('bibleContentSearchType').checked ? 'strict' : 'loose';
+        data = await searchContext(query, type);
+    }
     renderResultsList(data ? data.results : []);
 }
 
-async function runContentSearch() {
-    const query = document.getElementById('bibleContentQuery').value.trim();
-    if (!query) return;
-    const type = document.getElementById('bibleContentSearchType').checked ? 'strict' : 'loose';
-    clearResults();
-    const data = await searchContext(query, type);
-    renderResultsList(data ? data.results : []);
+document.getElementById('bibleSearchBtn').addEventListener('click', runSearch);
+searchQueryInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') runSearch(); });
+
+// Passage lookup (single verse / verse range / whole chapter)
+
+const getModeSelect = document.getElementById('bibleGetMode');
+const getBookInput = document.getElementById('bibleGetBook');
+const getChapterInput = document.getElementById('bibleGetChapter');
+const getVerseStartInput = document.getElementById('bibleGetVerseStart');
+const getVerseEndInput = document.getElementById('bibleGetVerseEnd');
+const getHint = document.getElementById('getHint');
+
+function updateGetModeUI() {
+    const mode = getModeSelect.value;
+    getVerseStartInput.hidden = mode === 'chapter';
+    getVerseEndInput.hidden = mode !== 'verses';
+    getVerseStartInput.placeholder = mode === 'verses' ? 'Start verse' : 'Verse';
+    if (mode === 'verse') {
+        getHint.textContent = 'Look up a single verse.';
+    } else if (mode === 'verses') {
+        getHint.textContent = 'Look up a range of verses within one chapter.';
+    } else {
+        getHint.textContent = 'Look up an entire chapter.';
+    }
 }
 
-document.getElementById('bibleDefSearchBtn').addEventListener('click', runDefSearch);
-document.getElementById('bibleDefQuery').addEventListener('keydown', (e) => { if (e.key === 'Enter') runDefSearch(); });
+getModeSelect.addEventListener('change', updateGetModeUI);
+updateGetModeUI();
 
-document.getElementById('bibleContentSearchBtn').addEventListener('click', runContentSearch);
-document.getElementById('bibleContentQuery').addEventListener('keydown', (e) => { if (e.key === 'Enter') runContentSearch(); });
+// /bible/verses and /bible/chapter return arrays of full verse objects
+// (same shape as /bible/verse); flatten them to match the {book, chapter,
+// verse, kjv} shape the search endpoints return so renderResultsList works.
+function normalizeVerseData(list, book) {
+    return (list || [])
+        .filter((d) => d && d.kjv)
+        .map((d) => ({ book, chapter: d.kjv.chapter, verse: d.kjv.verse, kjv: d.kjv.text }));
+}
+
+async function runGet() {
+    const mode = getModeSelect.value;
+    const book = getBookInput.value.trim();
+    const chapter = getChapterInput.value.trim();
+    if (!book || !chapter) return;
+
+    clearResults();
+
+    if (mode === 'verse') {
+        const verse = getVerseStartInput.value.trim();
+        if (!verse) return;
+        await openVerseDetail(book, chapter, verse);
+        return;
+    }
+
+    if (mode === 'verses') {
+        const verseStart = getVerseStartInput.value.trim();
+        const verseEnd = getVerseEndInput.value.trim();
+        if (!verseStart || !verseEnd) return;
+        const data = await fetchVerses(book, chapter, verseStart, verseEnd);
+        renderResultsList(normalizeVerseData(data, book));
+        return;
+    }
+
+    const data = await fetchChapter(book, chapter);
+    renderResultsList(normalizeVerseData(data, book));
+}
+
+document.getElementById('bibleGetBtn').addEventListener('click', runGet);
+[getBookInput, getChapterInput, getVerseStartInput, getVerseEndInput].forEach((el) => {
+    el.addEventListener('keydown', (e) => { if (e.key === 'Enter') runGet(); });
+});
 
 async function fetchQuiz() {
     const url = `${URL}/bible/quiz`;

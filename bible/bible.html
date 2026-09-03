@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>Bible Search | Caleb Zaleski</title>
     <link rel="stylesheet" href="/navbar.css">
-    <link rel="stylesheet" href="/bible/style.css?v=5">
+    <link rel="stylesheet" href="/bible/style.css?v=6">
     <link rel="icon" type="image/x-icon" href="/images/cz.png">
 
 
@@ -23,32 +23,6 @@
             <p class="pageSubtitle">Search the KJV text or its underlying Hebrew/Greek definitions, then click any verse for the full word-by-word breakdown.</p>
         </div>
 
-        <div class="glass-panel searchPanel">
-            <h4 class="sectionLabel">Search by Hebrew/Greek definition</h4>
-            <p class="sectionHint">Query a word or sentence from the original-language definition.</p>
-            <div class="searchmain">
-                <label for="bibleDefQuery" class="visuallyHidden">Definition search</label>
-                <input id="bibleDefQuery" class="bibleInput" type="text" placeholder="example: Spirit">
-                <button id="bibleDefSearchBtn" class="bibleBtn">Search</button>
-            </div>
-        </div>
-
-        <div class="glass-panel searchPanel">
-            <h4 class="sectionLabel">Search the KJV text</h4>
-            <p class="sectionHint">Search for a word, phrase or sentence from the KJV Bible.</p>
-            <div class="searchmain">
-                <label for="bibleContentQuery" class="visuallyHidden">KJV text search</label>
-                <input id="bibleContentQuery" class="bibleInput" type="text" placeholder="example: and He wept">
-                <label for="bibleContentSearchType" class="strictToggle">
-                    <input id="bibleContentSearchType" type="checkbox">
-                    <span>Strict search</span>
-                </label>
-                <button id="bibleContentSearchBtn" class="bibleBtn">Search</button>
-            </div>
-        </div>
-
-
-
         <div class="glass-panel biblequiz">
             <h4 class="sectionLabel">Book quiz</h4>
             <p id="quizBook" class="quizBookLabel"></p>
@@ -62,6 +36,47 @@
                 <button id="quizSubmitBtn" class="bibleBtn">Submit</button>
             </div>
             <p id="quizResult" class="quizResult"></p>
+        </div>
+
+        <div class="glass-panel searchPanel">
+            <h4 class="sectionLabel">Search</h4>
+            <p id="searchHint" class="sectionHint">Query a word or sentence from the original-language definition.</p>
+            <div class="searchmain">
+                <label for="bibleSearchMode" class="visuallyHidden">Search by</label>
+                <select id="bibleSearchMode" class="bibleSelect">
+                    <option value="def">Hebrew/Greek definition</option>
+                    <option value="content">KJV text</option>
+                </select>
+                <label for="bibleSearchQuery" class="visuallyHidden">Search query</label>
+                <input id="bibleSearchQuery" class="bibleInput" type="text" placeholder="example: Spirit">
+                <label for="bibleContentSearchType" class="strictToggle" id="strictToggleWrap" hidden>
+                    <input id="bibleContentSearchType" type="checkbox">
+                    <span>Strict search</span>
+                </label>
+                <button id="bibleSearchBtn" class="bibleBtn">Search</button>
+            </div>
+        </div>
+
+        <div class="glass-panel searchPanel">
+            <h4 class="sectionLabel">Get a passage</h4>
+            <p id="getHint" class="sectionHint">Look up a single verse.</p>
+            <div class="searchmain">
+                <label for="bibleGetMode" class="visuallyHidden">Get by</label>
+                <select id="bibleGetMode" class="bibleSelect">
+                    <option value="verse">Verse</option>
+                    <option value="verses">Verses (range)</option>
+                    <option value="chapter">Chapter</option>
+                </select>
+                <label for="bibleGetBook" class="visuallyHidden">Book</label>
+                <input id="bibleGetBook" class="bibleInput bibleInputSmall" type="text" placeholder="Book (e.g. John)">
+                <label for="bibleGetChapter" class="visuallyHidden">Chapter</label>
+                <input id="bibleGetChapter" class="bibleInput bibleInputTiny" type="number" min="1" placeholder="Chapter">
+                <label for="bibleGetVerseStart" class="visuallyHidden">Verse</label>
+                <input id="bibleGetVerseStart" class="bibleInput bibleInputTiny" type="number" min="1" placeholder="Verse">
+                <label for="bibleGetVerseEnd" class="visuallyHidden">End verse</label>
+                <input id="bibleGetVerseEnd" class="bibleInput bibleInputTiny" type="number" min="1" placeholder="End verse" hidden>
+                <button id="bibleGetBtn" class="bibleBtn">Get</button>
+            </div>
         </div>
 
         <div class="searchresult">

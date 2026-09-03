@@ -146,6 +146,41 @@ body {
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
+.bibleSelect {
+    padding: 11px 14px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    font-family: var(--font-sans), serif;
+    font-size: 14.5px;
+    color: #0f172a;
+    background-color: #f8fafc;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+    flex: 0 0 auto;
+    cursor: pointer;
+}
+
+.bibleSelect:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.bibleInputSmall {
+    flex: 0 0 180px;
+    width: 180px;
+}
+
+.bibleInputTiny {
+    flex: 0 0 100px;
+    width: 100px;
+}
+
+.bibleInput[hidden] {
+    display: none;
+}
+
 .strictToggle {
     display: flex;
     align-items: center;

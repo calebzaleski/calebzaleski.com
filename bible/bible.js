@@ -15,16 +15,29 @@ async function searchDef(query) {
 }
 
 async function searchContext(query, type) {
-    const url = `${URL}/bible/search_content_${type}?string=${encodeURIComponent(query)}`;
-
-    try {
-        const response = await fetch(url, { method: 'POST' });
-        const data = await response.json();
-        console.log('searchBible response:', data);
-        return data;
-    } catch (err) {
-        console.error('Error searching bible:', err);
+    let query_content = []
+    if (type !== "strict") {
+        query_content.push(...query.split(' '));
+        query_content.push(query.replace(/\s+/g, ''));
+        query_content.push(query);
     }
+    else {
+        query_content.push(query);
+    }
+    let data = []
+    for (const x of query_content) {
+        const url = `${URL}/bible/search_content_${type}?string=${encodeURIComponent(x)}`;
+
+        try {
+            const response = await fetch(url, {method: 'POST'});
+            const content = await response.json();
+            console.log('searchBible response:', content);
+            data.push(content);
+        } catch (err) {
+            console.error('Error searching bible:', err);
+        }
+    }
+    return data;
 }
 
 async function fetchVerse(book, chapter, verse) {

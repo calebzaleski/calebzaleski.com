@@ -272,7 +272,9 @@ function updateGetModeUI() {
     const mode = getModeSelect.value;
     getVerseStartInput.hidden = mode === 'chapter';
     getVerseEndInput.hidden = mode !== 'verses';
-    getVerseStartInput.placeholder = mode === 'verses' ? 'Start verse' : 'Verse';
+    document.getElementById('refSepColon').hidden = mode === 'chapter';
+    document.getElementById('refSepDash').hidden = mode !== 'verses';
+    getVerseStartInput.placeholder = mode === 'verses' ? 'e.g. 3' : 'e.g. 16';
     if (mode === 'verse') {
         getHint.textContent = 'Look up a single verse.';
     } else if (mode === 'verses') {
@@ -384,3 +386,20 @@ document.getElementById('quizAuthor').addEventListener('keydown', (e) => { if (e
 document.getElementById('quizAuthorbtn').addEventListener('keydown', (e) => {if (e.key === 'Enter') submitQuiz();});
 
 loadQuiz();
+
+// Search / Get a passage tabs
+const tabs = [
+    { btn: document.getElementById('tabSearchBtn'), panel: document.getElementById('tabPanelSearch') },
+    { btn: document.getElementById('tabGetBtn'), panel: document.getElementById('tabPanelGet') },
+];
+
+function activateTab(target) {
+    tabs.forEach(({ btn, panel }) => {
+        const active = btn === target;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-selected', String(active));
+        panel.hidden = !active;
+    });
+}
+
+tabs.forEach(({ btn }) => btn.addEventListener('click', () => activateTab(btn)));

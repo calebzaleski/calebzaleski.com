@@ -615,24 +615,6 @@ body {
 
 /* Responsive */
 @media (min-width: 860px) {
-    .searchresult {
-        display: grid;
-        grid-template-columns: 360px 1fr;
-        align-items: start;
-    }
-
-    #passageText {
-        grid-column: 1 / -1;
-    }
-
-    #searchResults {
-        grid-column: 1;
-    }
-
-    #verseDetail {
-        grid-column: 2;
-    }
-
     #verseDetail.open {
         display: block;
     }

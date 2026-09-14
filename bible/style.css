@@ -616,16 +616,21 @@ body {
 /* Responsive */
 @media (min-width: 860px) {
     .searchresult {
-        flex-direction: row;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        align-items: start;
+    }
+
+    #passageText {
+        grid-column: 1 / -1;
     }
 
     #searchResults {
-        flex: 0 0 360px;
+        grid-column: 1;
     }
 
     #verseDetail {
-        flex: 1 1 0;
+        grid-column: 2;
     }
 
     #verseDetail.open {

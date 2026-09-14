@@ -369,6 +369,43 @@ body {
     margin: 0 auto 20px;
 }
 
+#passageText {
+    order: 0;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 28px 32px;
+}
+
+#passageText:empty {
+    display: none;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.passageParagraph {
+    max-width: 68ch;
+    margin: 0 auto;
+    font-family: var(--font-scripture);
+    font-size: 1.2em;
+    line-height: 1.75;
+    color: var(--text-light);
+}
+
+.passageVerseNum {
+    font-family: var(--font-sans), sans-serif;
+    font-size: 0.65em;
+    font-weight: 600;
+    color: #93c5fd;
+    margin-right: 2px;
+    vertical-align: super;
+}
+
 #searchResults {
     order: 1;
     min-width: 0;

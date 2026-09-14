@@ -89,9 +89,24 @@ function dedupeByReference(results) {
 }
 
 function clearResults() {
+    document.getElementById('passageText').innerHTML = '';
     document.getElementById('searchResults').innerHTML = '';
     document.getElementById('verseDetail').innerHTML = '';
     document.getElementById('verseDetail').classList.remove('open');
+}
+
+// Renders a range/chapter as one continuous block of plain reading text,
+// with small superscript verse numbers, above the per-verse breakdown.
+function renderPassageText(verses) {
+    const container = document.getElementById('passageText');
+    if (!verses || verses.length === 0) {
+        container.innerHTML = '';
+        return;
+    }
+    const html = verses
+        .map((v) => `<sup class="passageVerseNum">${v.verse}</sup>${v.kjv}`)
+        .join(' ');
+    container.innerHTML = `<p class="passageParagraph">${html}</p>`;
 }
 
 // Runs `worker` over `items` with at most `limit` calls in flight at once.
@@ -316,12 +331,16 @@ async function runGet() {
         const verseEnd = getVerseEndInput.value.trim();
         if (!verseStart || !verseEnd) return;
         const data = await fetchVerses(book, chapter, verseStart, verseEnd);
-        renderResultsList(normalizeVerseData(data, book));
+        const normalized = normalizeVerseData(data, book);
+        renderPassageText(normalized);
+        renderResultsList(normalized);
         return;
     }
 
     const data = await fetchChapter(book, chapter);
-    renderResultsList(normalizeVerseData(data, book));
+    const normalized = normalizeVerseData(data, book);
+    renderPassageText(normalized);
+    renderResultsList(normalized);
 }
 
 document.getElementById('bibleGetBtn').addEventListener('click', runGet);

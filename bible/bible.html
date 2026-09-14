@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/bible/style.css?v=7">
+    <link rel="stylesheet" href="/bible/style.css?v=8">
     <link rel="icon" type="image/x-icon" href="/images/cz.png">
 
 
@@ -85,7 +85,7 @@
                         <span class="refSep" id="refSepColon" aria-hidden="true">:</span>
                         <label for="bibleGetVerseStart" class="visuallyHidden">Verse</label>
                         <input id="bibleGetVerseStart" class="bibleInput bibleInputTiny" type="number" min="1" placeholder="e.g. 16">
-                        <span class="refSep" id="refSepDash" aria-hidden="true">&ndash;</span>
+                        <span class="refSep" id="refSepDash" aria-hidden="true"></span>
                         <label for="bibleGetVerseEnd" class="visuallyHidden">End verse</label>
                         <input id="bibleGetVerseEnd" class="bibleInput bibleInputTiny" type="number" min="1" placeholder="e.g. 18" hidden>
                         <button id="bibleGetBtn" class="bibleBtn">Get</button>
@@ -96,6 +96,7 @@
         </div>
 
         <div class="searchresult">
+            <div id="passageText"></div>
             <div id="searchResults"></div>
             <div id="verseDetail"></div>
         </div>

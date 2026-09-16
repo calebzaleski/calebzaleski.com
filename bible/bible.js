@@ -261,14 +261,16 @@ async function runSearch() {
     if (!query) return;
     clearResults();
 
-    let data;
+    let results;
     if (searchModeSelect.value === 'def') {
-        data = await searchDef(query);
+        const data = await searchDef(query);
+        results = data ? data.results : [];
     } else {
         const type = document.getElementById('bibleContentSearchType').checked ? 'strict' : 'loose';
-        data = await searchContext(query, type);
+        const data = await searchContext(query, type);
+        results = (data || []).flatMap((d) => (d && d.results) || []);
     }
-    renderResultsList(data ? data.results : []);
+    renderResultsList(results);
 }
 
 document.getElementById('bibleSearchBtn').addEventListener('click', runSearch);

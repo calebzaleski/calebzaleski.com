@@ -1,4 +1,4 @@
-let URL = 'https://proxy.calebzaleski.com'
+let URL = 'https://bp.calebzaleski.com'
 
 async function searchDef(query) {
     // Backend URL for searching the bible; the proxy attaches BIBLE_API_KEY server-side

@@ -807,6 +807,50 @@ h1 {
         width: 90vw;
         padding: 18px;
     }
+
+    #current-time {
+        font-size: 28px !important;
+    }
+
+    .displayboxmain1, .displayboxmain2 {
+        font-size: 16px;
+        height: auto;
+        min-height: 120px;
+    }
+
+    .displayboxbottom1, .displayboxbottom2 {
+        font-size: 12px;
+    }
+
+    .displayboxmain1 button {
+        width: 70%;
+        font-size: 14px;
+    }
+
+    .displayboxwrapper {
+        margin: 12px;
+    }
+
+    footer {
+        margin-top: 60px;
+    }
+
+    .aboutpageimg {
+        width: min(80vw, 360px);
+    }
+
+    .printer-img {
+        width: 80vw;
+    }
+
+    .recipe-img {
+        width: 90vw;
+    }
+
+    .timeline {
+        padding: 20px;
+        margin: 24px 12px;
+    }
 }
 
 .printer-img {

@@ -166,3 +166,9 @@
         letter-spacing: 2px;
     }
 }
+
+@media (max-width: 480px) {
+    .navbarleft h3 {
+        display: none;
+    }
+}
